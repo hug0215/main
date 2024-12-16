@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>学员登记表</title>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/dongze.ico" media="screen" />
+    <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__static/common/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+      <script src="/Public/Bootstrap-Metro/Metro/html5shiv.min.js"></script>
+      <script src="/Public/Bootstrap-Metro/Metro/respond.min.js"></script>
+    <![endif]-->
+    <script src="__PUBLIC__static/common/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__static/common/jquery.form.js"></script>
+    <script src="__PUBLIC__static/common/layui/layui.js"></script>
+    <style type="text/css">* { touch-action: pan-y; }</style>
+</head>
+<body>
+<div class="layui-container layui-margin-2" >
+    <form class="layui-form" id="news_form" style="margin-top: 20px;">
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-note"></i>
+            </div>
+            <input type="text" name="clubid" value="{$msg.clubid}" lay-verify="required" placeholder="总会编号" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-note"></i>
+            </div>
+            <input type="text" name="studentid" value="{$msg.studentid}" lay-verify="required" placeholder="学号" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-date"></i>
+                </div>
+                <input type="text" name="pxdate" value="{$msg.pxdate}" class="layui-input" lay-verify="required" id="ID-laydate-demo" placeholder="培训日期">
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-username"></i>
+            </div>
+            <input type="text" name="username" value="{$msg.username}" lay-verify="required" placeholder="姓名" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: left;width: 60px;padding: 9px 5px;color: #757575;">性别：</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+                {if condition="$msg.sex eq 1"}
+                    <input type="radio" name="sex" value="1" checked title="男">
+                    <input type="radio" name="sex" value="2" title="女">
+                {elseif condition="$msg.sex eq 2"/}
+                    <input type="radio" name="sex" value="1" title="男">
+                    <input type="radio" name="sex" value="2" checked title="女">
+                {else /}
+                    <input type="radio" name="sex" value="1" title="男">
+                    <input type="radio" name="sex" value="2" title="女">
+                {/if}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-date"></i>
+                </div>
+                <input type="text" name="birthday" value="{$msg.birthday}" class="layui-input" lay-verify="required" id="ID-laydate-demo1" placeholder="出生年月">
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-user"></i>
+            </div>
+            <input type="text" name="division" value="{$msg.division}" lay-verify="required" placeholder="部门" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-row">
+            <div class="layui-col-xs12">
+              <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-cellphone"></i>
+                </div>
+                <input type="text" name="tel" value="{$msg.tel}" lay-verify="required|phone" placeholder="手机号码" lay-reqtext="请填写手机号码" autocomplete="off" class="layui-input" id="reg-cellphone">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-picture"></i>
+            </div>
+            <input type="text" name="sfz" value="{$msg.sfz}" lay-verify="required|identity" placeholder="身份证号码" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="text-align: left;width: 50px;padding: 9px 5px;color: #757575;">照片:</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+              <button type="button" class="layui-btn" id="test-upload-img">
+                <i class="layui-icon">&#xe67c;</i>上传照片
+              </button>
+              <input type="file" name="avatar" style="display: none;" value="" id="image-upload-field">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-col-xs12 thumbnail" style="border: none;margin:0;">
+            <img id="image-pic"  src="{$msg.avatar}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg" style="background: #c23232;">提交</button>
+        </div>
+    </form>
+</div>  
+<script>
+layui.use(function(){
+  var form = layui.form;
+  var layer = layui.layer;
+  var laydate = layui.laydate;
+  // 渲染
+  laydate.render({
+    elem: '#ID-laydate-demo',
+  });
+  laydate.render({
+    elem: '#ID-laydate-demo1',
+    type: 'month'
+  });
+  
+  // 提交事件
+  form.on('submit(demo-reg)', function(data){
+    var field = data.field; // 获取表单字段值
+    var imagepic = $("#image-pic").attr("src");
+    if(!imagepic){
+        if(!field.avatar){
+          layer.msg('照片必须上传');
+          return false;
+        }
+    }
+    var data_reception = {
+    url: "{:url('Sign/regSubmit')}",
+    type: "post",
+    beforeSubmit: function () {
+        load = layer.load();
+    },
+    success: function (res) {
+        layer.close(load);
+        console.log(res);
+        if(res == "1"){
+            layer.msg('提交成功！', {icon: 1}, function(){
+                // window.location.reload();
+            });
+        }else if(res == "2"){
+            layer.msg('请上传正确的照片！', {icon: 0});
+        }else{
+            layer.msg('提交失败！', {icon: 0});
+        }
+        }
+    }
+    $("#news_form").ajaxForm();
+    $("#news_form").ajaxSubmit(data_reception);
+
+    
+    return false; // 阻止默认 form 跳转
+  });
+});
+$("#test-upload-img").click(function(){
+    $("#image-upload-field").trigger("click");
+    $("#image-upload-field").change(function () {
+        var objUrl = getObjectURL(this.files[0]);
+        if(objUrl){
+            $("#image-pic").attr("src", objUrl);
+        }
+    });
+});
+function getObjectURL(file) {
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
+</script>   
+</body>
+</html>

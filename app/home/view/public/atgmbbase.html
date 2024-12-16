@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        {block name="title"}<title>爱淘直播</title>{/block}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0，maximum-scale=1.0, user-scalable=no"/>
+        <link rel="shortcut icon" type="image/x-icon" href="/firstlogo.ico" media="screen" />
+        <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/home/css/broadcast3.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="__PUBLIC__static/common/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="__PUBLIC__static/common/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="__PUBLIC__static/common/layer_mobile/layer.js"></script>
+    <body>
+    <style>body{font-family: '微软雅黑';background:#ecf0f3;padding:0;margin:0;overflow-x: hidden;);}.layui-m-layercont {padding: 0;line-height: 22px;text-align: center;}</style>
+    {block name="body"}{/block}
+    <script type="text/javascript" src="__PUBLIC__static/home/livejs/atglive.js?version=1.1.1"></script>
+    <script type="text/javascript" src="__PUBLIC__static/home/js/metro-mb-chat.js?version=2.4.2"></script>
+    <script type="text/javascript" src="__PUBLIC__static/home/js/metro-mb-date.js?version=2.5.8"></script>
+    <script type="text/javascript" src="__PUBLIC__static/home/livejs/huyamobile.js"></script>
+    <script type="text/javascript" src="__PUBLIC__qqFace/js/jquery-browser.js"></script>
+    <script type="text/javascript" src="__PUBLIC__qqFace/js/jquery.huyaFacemb.js?version=2.1.6"></script>
+    <script type="text/javascript" src="__PUBLIC__static/home/livejs/log_reg_mb.js?version=2.1.7"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__static/common/jquery.form.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.emotion').qqFace({
+            id : 'facebox', 
+            assign:'zb_textarea', 
+            path:'/public/qqFace/newarclist/' //表情存放的路径
+        });
+        $(window).resize(function(){
+          //初始页面内部容器高度
+          var win_height = $(window).height();
+          //右边聊天部分
+          var play = $("#play").height();//图片框高度
+          var more_height = 20;
+          var user_box = $("#user_box").height();
+          var message_send = $("#message_send").height();//发言框高度
+          // alert(message_send);
+          $("#message_receive_list").height(win_height-play-user_box-message_send-more_height);//赋值聊天框高度
+          $("#message_panz_list").height(win_height-play-user_box-message_send-more_height);//赋值盘中直击高度
+        });
+    });
+    //初始页面内部容器高度
+      var win_height = $(window).height();
+      // alert(win_height);
+      var more_height = 35;//浏览器补位高度
+      //右边聊天部分
+      var play = $("#play").height();//图片框高度
+      var user_box = $("#user_box").height();
+      var message_send = $("#message_send").height();//发言框高度
+      $("#message_receive_list").height(win_height-play-user_box-message_send-more_height);//赋值聊天框高度
+      $("#message_panz_list").height(win_height-play-user_box-message_send-more_height);//赋值盘中直击高度
+      nowdate();
+      setInterval(function(){nowdate();},10000);
+      setInterval(function(){delpc();},20000);
+      function Yninit(data){
+        var group_id = $("#live_nav").attr("group_id");
+        var uid = $("#live_nav").attr("uid");
+        $.post('/home/Livechat/index', {client_id: data.client_id,group_id:group_id,uid: uid}, function(msg){
+            console.log(msg);
+            $("#username").html(msg.username);
+        }, 'json');
+    }
+    </script>
+    </body>
+</html>
+

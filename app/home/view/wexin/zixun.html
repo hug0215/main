@@ -1,0 +1,94 @@
+{extend name="public/wexinbase"/}
+{block name="body"}
+<style type="text/css">
+.m-table {
+    width: 100%;
+    background: #fff;
+    font-size: 14px;
+    table-layout: fixed;
+}
+.m-table th.cur, .m-table th.desc, .m-table th.asc {
+    background: #db4a39;
+    border-radius: 10px 10px 0 0;
+}
+.m-table th.cur a, .m-table th.desc a, .m-table th.asc a {
+    background: #db4a39;
+    color: #fff;
+    font-weight: bold;
+}
+.m-table td{
+	padding: 6px 2px;
+    text-align: center;
+    line-height: 24px;
+}
+.m-table th {
+    position: relative;
+    color: #666;
+    text-align: center;
+    padding: 2px 2px 20px 2px;
+    line-height: 16px;
+}
+
+.lb-blue {
+    background: #0091c9;
+}
+.label {
+    display: inline-block;
+    color: #fff;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 0 1px;
+    border-radius: 2px;
+}
+.c-rise {
+    color: #db4a39 !important;
+}
+.c-fall {
+    color: #57ab76 !important;
+}
+.m-table th.cur .arr-up, .m-table .asc s {
+    background-position: 0 -12px;
+}
+.m-table th .arr-down, .m-table th .arr-up, .m-table th s {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -6px;
+    background: #000;
+    display: block;
+    width: 11px;
+    height: 6px;
+    background: url(http://i.thsi.cn/images/datacenter/financial/arrow.png) 0 0;
+    overflow: hidden;
+}
+</style>
+<div class="container-fluid" style="padding: 0"> 
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">个股资金流入排行榜</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="{:url('Live/zixun')}">个股资金流入排行榜<span class="sr-only">(current)</span></a></li>
+	        <li><a href="{:url('Live/bankuai')}">板块资金流入排行榜</a></li>
+	        <li><a href="{:url('Live/jiejin')}">限售解禁</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="{:url('Live/longhu')}">龙虎榜数据</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>  
+	<div style="padding:0">{$table}</div>
+</div>
+{/block}

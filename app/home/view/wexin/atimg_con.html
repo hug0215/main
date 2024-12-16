@@ -1,0 +1,22 @@
+{extend name="public/wexinbase"/}
+{block name="title"}<title>{$title}</title>{/block}
+{block name="body"}
+    <div class="container-fluid">
+        {volist name="list" id="vo"}
+            <div class="col-xs-12" style="font-size:20px;padding:5px 2px;">{$vo.title}</div>
+            <div class="col-xs-12" style="font-size:10px;color:#808080;padding:5px 2px;">{$vo.time|date="Y-m-d h:i:s",###}</div>
+
+            <div class="col-xs-12" id="content" style="padding:0;margin:0;">
+                {$vo.content}
+            </div>
+        {/volist}
+    </div>
+    <script type="text/javascript">
+    //进入当前页面阅读数+1
+        $(function(){
+            $("#content img").each(function(){
+                $(this).parent().addClass("thumbnail");
+            });
+        });
+    </script>
+{/block}

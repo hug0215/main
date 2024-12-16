@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>需求登记表</title>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/dongze.ico" media="screen" />
+    <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__static/common/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+      <script src="/Public/Bootstrap-Metro/Metro/html5shiv.min.js"></script>
+      <script src="/Public/Bootstrap-Metro/Metro/respond.min.js"></script>
+    <![endif]-->
+    <script src="__PUBLIC__static/common/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__static/common/jquery.form.js"></script>
+    <script src="__PUBLIC__static/common/layui/layui.js"></script>
+    <style type="text/css">* { touch-action: pan-y; }
+    .layui-form-checkbox div {
+    white-space: normal !important; /* 允许换行 */
+    width: auto !important; /* 或者设置一个具体的宽度值 */}
+    </style>
+</head>
+<body>
+<div class="layui-container layui-margin-2" >
+    <form class="layui-form" id="news_form" style="margin-top: 20px;">
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-note"></i>
+            </div>
+            <select name="qu">
+              <option value="0">请选择区域</option>
+              <option value="天河区">天河区</option>
+              <option value="番禺区">番禺区</option>
+              <option value="越秀区">越秀区</option>
+              <option value="花都区">花都区</option>
+              <option value="白云区">白云区</option>
+              <option value="荔湾区">荔湾区</option>
+              <option value="黄埔区">黄埔区</option>
+              <option value="海珠区">海珠区</option>
+              <option value="萝岗区">萝岗区</option>
+              <option value="南沙区">南沙区</option>
+              <option value="增城区">增城区</option>
+              <option value="从化区">从化区</option>
+            </select>
+          </div>
+        </div> 
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-note"></i>
+            </div>
+            <input type="text" name="name" value="" lay-verify="required" placeholder="社区名称" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: left;width: 100px;padding: 9px 5px;color: #757575;">活动内容：</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+                <input type="checkbox" name="activity" value="1" title="1.心肺复苏CPR,自动体外除颤仪AED,气道异物梗阻">
+                <input type="checkbox" name="activity" value="2" title="2.外伤急救基本技术（外伤止血、伤口包扎）" > 
+                <input type="checkbox" name="activity" value="3" title="3.A、常见急症的现场急救处理：休克、晕厥、食物中毒、中暑、癫痫、心肌埂塞、高热惊厥等&nbsp;&nbsp;&nbsp;&nbsp;
+                B、意外伤害的现场紧急处理:烧烫伤、触电、水、煤气中毒、毒蛇咬伤、动物咬伤等&nbsp;&nbsp;&nbsp;&nbsp;
+                c、突发事件:地震、火灾、踩踏等" > 
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-username"></i>
+            </div>
+            <input type="text" name="username" value="" lay-verify="required" placeholder="联系人" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-row">
+            <div class="layui-col-xs12">
+              <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-cellphone"></i>
+                </div>
+                <input type="text" name="tel" value="" lay-verify="required|phone" placeholder="联系电话" lay-reqtext="请填写手机号码" autocomplete="off" class="layui-input" id="reg-cellphone">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: left;width: 60px;padding: 9px 5px;color: #757575;">性别：</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+                {if condition="$msg.sex eq 1"}
+                    <input type="radio" name="sex" value="1" checked title="男">
+                    <input type="radio" name="sex" value="2" title="女">
+                {elseif condition="$msg.sex eq 2"/}
+                    <input type="radio" name="sex" value="1" title="男">
+                    <input type="radio" name="sex" value="2" checked title="女">
+                {else /}
+                    <input type="radio" name="sex" value="1" title="男">
+                    <input type="radio" name="sex" value="2" title="女">
+                {/if}
+            </div>
+        </div> 
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-user"></i>
+            </div>
+            <input type="text" name="address" value="" lay-verify="required" placeholder="培训地址" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                  <i class="layui-icon layui-icon-date"></i>
+                </div>
+                <input type="text" name="day" value="" class="layui-input" lay-verify="required" id="ID-laydate-demo1" placeholder="培训日期" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-note"></i>
+            </div>
+            <select name="traintime">
+              <option value="0">培训时间</option>
+              <option value="上午 9:00--11:30">上午 9:00--11:30</option>
+              <option value="下午 2:00--4:00">下午 2:00--4:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: left;width: 100px;padding: 9px 5px;color: #757575;">培训语言：</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+                <input type="radio" name="lang" value="1" title="粤语">
+                <input type="radio" name="lang" value="2" title="普通话">
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="text-align: left;width: 100px;padding: 9px 5px;color: #757575;">设备：</label>
+            <div class="layui-input-block" style="margin-left: 0;color: #757575;">
+                <input type="checkbox" name="equipment" value="1" title="电脑">
+                <input type="checkbox" name="equipment" value="2" title="投影仪" > 
+                <input type="checkbox" name="equipment" value="3" title="音响" > 
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg" style="background: #c23232;">提交</button>
+        </div>
+    </form>
+</div>  
+<script>
+layui.use(function(){
+  var form = layui.form;
+  var layer = layui.layer;
+  var laydate = layui.laydate;
+  // 渲染
+  laydate.render({
+    elem: '#ID-laydate-demo1',
+    type: 'month'
+  });
+  
+  // 提交事件
+  form.on('submit(demo-reg)', function(data){
+    var field = data.field; // 获取表单字段值
+    var activitys = [];
+    $("input[name='activity']").each(function(){
+        if($(this).is(':checked')) {
+            activitys.push($(this).val());
+        }
+    });
+    var equipments = [];
+    $("input[name='equipment']").each(function(){
+        if($(this).is(':checked')) {
+            equipments.push($(this).val());
+        }
+    });
+    var data_reception = {
+    url: "{:url('Sign/regFrom')}",
+    type: "post",
+    data:{activitys,equipments},
+    beforeSubmit: function () {
+        load = layer.load();
+    },
+    success: function (res) {
+        layer.close(load);
+        console.log(res);
+        if(res == "1"){
+            layer.msg('提交成功！', {icon: 1}, function(){
+                // window.location.reload();
+            });
+        }else if(res == "2"){
+            layer.msg('请上传正确的照片！', {icon: 0});
+        }else{
+            layer.msg('提交失败！', {icon: 0});
+        }
+        }
+    }
+    $("#news_form").ajaxForm();
+    $("#news_form").ajaxSubmit(data_reception);
+
+    
+    return false; // 阻止默认 form 跳转
+  });
+});
+</script>   
+</body>
+</html>

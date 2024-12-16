@@ -1,0 +1,37 @@
+{extend name="public/wexinbase"/}
+{block name="title"}<title>爱淘策略</title>{/block}
+{block name="body"}
+<div class="container">
+    <div class="row animated fadeInDown cursor" id="content">
+        {volist name="list" id="vo"}
+          <a href="{:url('Wexin/index_con',array('atid'=>$vo['id']))}" style="color:#fff;">
+            <div class="col-xs-12 margin-top-10 zhoub_cl" title="{$vo.title}" style="cursor: pointer;">
+                <div class="thumbnail college_ch" style="margin:0;padding-bottom:0;">
+                  <img src="{$vo.pic}" alt="...">
+                  <div class="caption">
+                    <h5 style="margin:0 0 5px 0;padding: 0;font-weight: bold;text-align:left;">{$vo.title}</h5>
+                    <div style="font-size: 12px;margin-bottom: 5px;text-align:left;">{$vo.day}</div>
+                  </div>
+                </div>
+            </div>
+          </a>  
+        {/volist}
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+  $(window).scroll(function () {
+    //滚动条已经到达底部
+    if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+      var loading = layer.open({type: 2,content: '加载中'});
+      var page = $(".zhoub_cl").length;
+        $.post('/home/Wexin/index_con_page',{page:page}, function(mms){
+        layer.close(loading);
+        console.log(1);
+        $("#content").append(mms);
+      }, 'json');   　
+    }
+  });
+});
+</script>
+{/block}

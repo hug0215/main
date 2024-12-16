@@ -1,0 +1,54 @@
+{extend name="public/wexinbase"/}
+{block name="body"}
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" >
+  <div class="container" style="text-align: center;padding:0;font-size: 12px;color:#7d7d7d;">
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+       <a style="color:#7d7d7d;text-decoration:none;" href="{:url('/wechat')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+          <i class="layui-icon layui-icon-home" style="font-size: 22px; color: #7d7d7d;"></i>
+          </div>
+          首页
+        </a>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <div class="dropup">
+        <button class="dropdown-toggle" style="background: none;border:none;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="col-xs-12" style="padding: 2px 0">
+            <i class="layui-icon layui-icon-survey" style="font-size: 22px; color: #7d7d7d;"></i> 
+          </div>
+          培训报名
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="#">CPR+AED 半天</a></li>
+            <li><a href="#">初级救护员 1天</a></li>
+            <li><a href="#">红会救护员 2天</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">美国AHA认证班</a></li>
+            <li><a href="#">红会+AHA认证班</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/message')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+            <i class="layui-icon layui-icon-chat" style="font-size: 22px; color: #7d7d7d;font-weight: bold;"></i> 
+          </div>
+          消息
+         </a>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <a style="color:#db1a23;text-decoration:none;" href="{:url('Wexin/mine')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+          <i class="layui-icon layui-icon-username" style="font-size: 22px; color: #db1a23;"></i> 
+          </div>
+          我的
+        </a>
+      </div>
+  </div>
+</nav>
+<div class="col-xs-12" style="padding:10px;height: 50px;"></div>
+<script>
+
+</script>
+{/block}

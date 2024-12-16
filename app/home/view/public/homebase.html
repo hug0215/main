@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        {block name="title"}<title>Metroβ</title>{/block}
+        <meta charset="UTF-8">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0，maximum-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" type="image/x-icon" href="/firstlogo.ico" media="screen" />
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/css/style.css?version=2.3.8" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/home/css/style.css?version=2.3.7" rel="stylesheet">
+        <link href="__PUBLIC__layim/dist/css/layui.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="/Public/Bootstrap-Metro/Metro/html5shiv.min.js"></script>
+          <script src="/Public/Bootstrap-Metro/Metro/respond.min.js"></script>
+        <![endif]-->
+        <script src="__PUBLIC__static/common/jquery-2.1.1.min.js"></script>
+        <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+        <script src="__PUBLIC__static/common/bootstrap/js/bootstrap.min.js"></script>
+        <script src="__PUBLIC__static/common/layer/layer.js"></script>
+        <script src="__PUBLIC__static/common/jquery.form.js"></script>
+        <script src="__PUBLIC__static/common/metisMenu/jquery.metisMenu.js"></script>
+        <script src="__PUBLIC__static/common/metisMenu/hplus.js"></script>
+        <script src="__PUBLIC__static/common/laydate/laydate.js"></script>
+        <script src="__PUBLIC__static/common/common.js?version=2.3.4"></script>
+        <script src="__PUBLIC__layim/dist/layui.js"></script>
+    </head>    
+    <body class="mini-navbar">
+        <div class="container-fiuld" id="wrapper" sound="{$sound}" popup="{$popup}">
+            <nav class="navbar-default navbar-static-side" role="navigation" style="position: fixed;background: #2f4050;">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="nav-header">
+                            <div class="dropdown profile-element"> <span>
+                                <img alt="image" class="img-circle" src="__PUBLIC__static/home/img/profile_small2.jpg" />
+                                 </span>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{$account}</strong>
+                                 </span> <span class="text-muted text-xs block">{$username} <b class="caret"></b></span> </span>
+                                </a>
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <li><a href="#" onclick="addVoice()">个人资料</a>
+                                    </li>
+                                    <li onclick="change_password(this)"><a href="#">修改密码</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="{:url('Sign/logout')}">安全退出</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="logo-element">
+                                S+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{:url('Index/index')}">
+                                <i class="fa fa-home"></i>
+                                <span class="nav-label">系统首页</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-google-wallet"></i> 
+                                <span class="nav-label">市场动向</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{:url('Market/index')}">市场动向</a>
+                                    </li>
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-youtube-play"></i> 
+                                <span class="nav-label">股民学院</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{:url('Video/index')}">股票基础</a>
+                                    </li>
+                                    <li>
+                                        <a href="{:url('Video/qihuo')}">期货基础</a>
+                                    </li>
+                                </ul>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-area-chart"></i> 
+                                <span class="nav-label">研报中心</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{:url('Report/index')}">日报</a>
+                                    </li>
+                                    <li>
+                                        <a href="{:url('Report/zhoub')}">点金周刊</a>
+                                    </li>
+                                </ul>
+                        </li> 
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-windows"></i> 
+                                <span class="nav-label">系统设置</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a target="_blank" href="http://www.1234tv.com/gucj/216832">直播系统</a>
+                                        <!-- <a target="_blank" url="http://www.1234tv.com/gucj/216832" onclick="openWindow(this)" href="#">直播系统</a> -->
+                                    </li>
+                                    <li>
+                                        <a href="{:url('Live/index')}">系统设置</a>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>     
+                    </ul>
+                </div>
+            </nav>
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="row border-bottom" style="margin-bottom: 50px;">
+                    <nav class="navbar navbar-static-top col-xs-12" role="navigation" style="margin-bottom: 0;position: fixed;z-index: 9999;">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                            <form role="search" class="navbar-form-custom" method="get">
+                                <div class="form-group">
+                                    <div class="col-xs-5">
+                                        <input type="text" placeholder="请输入查询内容" class="form-control" name="search" id="top-search">
+                                    </div>
+                                    <div class="col-xs-5" style="border-left: 1px solid #dedede;">
+                                        <input type="text" placeholder="请选择要查询的日期" class="form-control" name="riqi" id="riqi">
+                                    </div>
+                                    <div class="col-xs-2"> <button style="font-size: 14px;margin: 11px;" class="btn btn-danger btn-sm" type="submit">搜索</button></div>
+                                </div>
+                                <script type="text/javascript">
+                                    laydate.render({
+                                      elem: '#riqi'
+                                    });
+                                </script>
+                            </form>
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right" style="margin-right: 30px;">
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用Shoutsystem</span>
+                            </li>
+                            <li>
+                                <a href="{:url('Sign/logout')}">
+                                    <i class="fa fa-sign-out"></i> 退出
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                {block name="body"}{/block}
+                <script src="__PUBLIC__static/home/js/index.js?version=2.4.3"></script>
+                <script src="__PUBLIC__static/home/js/electron.js?version=2.4.3"></script>
+            </div>    
+        </div>
+    </body>
+</html>

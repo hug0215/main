@@ -1,0 +1,419 @@
+{extend name="public/mobilebase"/}
+{block name="body"}
+<div id="wrapper" uid="{$uid}"></div>
+    <script type="text/javascript">
+      $(function(){
+          layui.use('mobile', function(){
+            var mobile = layui.mobile
+            ,layim = mobile.layim; 
+                //基础配置
+                layim.config({
+                  init: {
+                    mine: {$user_arr}
+                    ,friend: {$friend_arr}
+                    ,group: {$group_arr}
+                  }
+                  ,title: "我的战队"
+                  ,copyright: true
+                  ,isNewFriend:false
+                  ,isgroup:true
+                  ,notice:true
+                  //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
+                  ,uploadImage: {
+                      url: "{:url('Layim/uploadImage')}" //接口地址
+                      ,type: 'post' //默认post
+                  }       
+                  //上传文件接口（返回的数据格式见下文），若不开启文件上传，剔除该项即可
+                  ,uploadFile: {
+                      url: "{:url('Layim/uploadFile')}" //接口地址
+                      ,type: 'post' //默认post
+                  }
+                    //扩展聊天面板工具栏
+                  ,tool: []
+                    // ,chatLog: "{:url('Layim/chatlog')}" //聊天记录页面地址，若不开启，剔除该项即可
+                    //可同时配置多个
+                   ,moreList: [{
+                      alias: 'college'
+                      ,title: '聚合学院'
+                      ,iconUnicode: '&#xe6ed' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'ribao'
+                      ,title: '财智日报'
+                      ,iconUnicode: '&#xe705' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'zhoub'
+                      ,title: '财富周报'
+                      ,iconUnicode: '&#xe6b2' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'jiepan'
+                      ,title: '实时解盘'
+                      ,iconUnicode: '&#xe63c' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'music'
+                      ,title: '早盘一分钟'
+                      ,iconUnicode: '&#xe6fc' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'beita'
+                      ,title: '贝塔黑马股'
+                      ,iconUnicode: '&#xe629' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'guzhi'
+                      ,title: '股指智能决策'
+                      ,iconUnicode: '&#xe62c' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'qihuo'
+                      ,title: '期货交易动向'
+                      ,iconUnicode: '&#xe857' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'live'
+                      ,title: '在线直播'
+                      ,iconUnicode: '&#xe652' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    },{
+                      alias: 'logout'
+                      ,title: '注销'
+                      ,iconUnicode: '&#xe640' //图标字体的unicode，可不填
+                      ,iconClass: '' //图标字体的class类名
+                    }]
+                });
+
+                //监听发送消息
+                layim.on('sendMessage', function(res){
+                  var mine = res.mine; //包含我发送的消息及我的信息
+                  var to = res.to; //对方的信息
+                  console.log(mine);
+                  console.log(to);
+                  $.post('/home/Wechat/sendMessage', {mine:mine,to:to}, function(msg){
+                        console.log(msg);
+                    }, 'json');  
+                  });
+
+                //监听点击“新的朋友”
+                layim.on('newFriend', function(){
+                  layim.panel({
+                    title: '新的朋友' //标题
+                    ,tpl: '<div style="padding: 10px;">自定义模版，{{d.data.test}}</div>' //模版
+                    ,data: { //数据
+                      test: '么么哒'
+                    }
+                  });
+                });
+
+                //监听查看更多记录
+                  layim.on('chatlog', function(data, ul){
+                    console.log(data); //得到当前会话对象的基本信息
+                    console.log(ul); //得到当前聊天列表所在的ul容器，比如可以借助他来实现往上插入更多记录
+                    //弹出一个更多聊天记录面板
+                    layim.panel({
+                      title: '与 '+ data.username +' 的聊天记录' //标题
+                      ,tpl: '这里是模版，{{d.data.test}}' //模版
+                      ,data: { //数据
+                        test: 'Hello'
+                      }
+                    });
+                  });
+                
+                //查看聊天信息
+                layim.on('detail', function(data){
+                  console.log(data); //获取当前会话对象
+                  layim.panel({
+                    title: data.name + ' 聊天信息' //标题
+                    ,tpl: '<div style="padding: 10px;">自定义模版，<a href="http://www.layui.com/doc/modules/layim_mobile.html#ondetail" target="_blank">11111</a></div>' //模版
+                    ,data: { //数据
+                      test: '么么哒'
+                    }
+                  });
+                });
+                //监听点击更多列表
+              layim.on('moreList', function(obj){
+                switch(obj.alias){ //alias即为上述配置对应的alias
+                  case 'college': //发现
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/college', function(msg){
+                        layer.close(loading);
+                        layim.panel({
+                          title: '聚合学院'
+                          ,tpl: msg
+                        });
+                    $("#content_t").click(function(){
+                        $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+                        $("#content").show().siblings().hide();
+                    });
+                    $("#guzhi_t").click(function(){
+                        $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+                        $("#guzhi").show().siblings().hide();
+                    });
+                    $("#shifo_t").click(function(){
+                        $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+                        $("#shifo").show().siblings().hide();
+                    });
+                    $("#laobing_t").click(function(){
+                        $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+                        $("#laobing").show().siblings().hide();
+                    });
+                     $(".college_ch").click(function(){
+                        var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                        var vid = $(this).attr("vid");
+                        $.post('/home/Mobile/college_con',{vid:vid}, function(ms){
+                          layer.close(loading);
+                          layim.panel({
+                            title: '视频课程'
+                            ,tpl: ms
+                          });
+                         }, 'json');
+                      });
+                    }, 'json');
+                  break;
+                  case 'ribao': 
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/ribao', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                          title: '财智日报'
+                          ,tpl: msg
+                        });
+                      layer.photos({
+                          photos: '#layer-photos-demo'
+                          ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                        }); 
+                      });
+                  break;
+                  case 'zhoub': 
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/zhoub', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '财富周报'
+                        ,tpl: msg
+                      });
+                      $(".zhoub_cl").click(function(){
+                        var pdf = $(this).attr("pdf");
+                        var titles = $(this).attr("title");
+                        layim.panel({
+                          title: titles
+                          ,tpl: '<div><iframe style="width:100%;height:800px;border:none;" src="/public/pdf/web/viewer.html?file='+pdf+'"></iframe></div>'
+                        });
+                      });
+                    }, 'json');
+                  break;
+                  case 'jiepan': 
+                    layim.showNew('More', false);
+                    layim.showNew('jiepan', false);
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/jiepan', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '实时解盘'
+                        ,tpl: msg
+                      });
+                      $(".jiepan_cl").click(function(){
+                        var content = $(this).children("span").html();
+                        var titles = $(this).attr("title");
+                        layim.panel({
+                          title: titles
+                          ,tpl: '<div id="gpimg" style="padding:10px;">'+content+'</div>'
+                        });
+                        $("#gpimg img").each(function(){
+                            $(this).parent().addClass("thumbnail thumbnail_no_bg");
+                        });
+                      });
+                    }, 'json');
+                  break;
+                  case 'music': 
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/music', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '早盘一分钟'
+                        ,tpl: msg
+                      });
+                      $(".music_box").click(function(){
+                        var mp3 = $(this).attr("mp3");
+                        var titles = $(this).attr("title");
+                        layim.panel({
+                          title: titles
+                          ,tpl: '<div style="padding:10px;text-align:center;"><audio src="'+mp3+'" controls="controls" controlsList="nodownload" autoplay="autoplay">Your browser does not support the audio tag.</audio></div><div style="padding:10px;text-align:left;">声明：本文中所涉及任何证券市场消息均来源于互联网，对其中的操作建议、相关策略及其他涉及到投资者自身利益事项，本文提供信息仅做参考，投资有风险，建议投资者识别风险，谨慎操作；本平台任何分析预测表述不代表任何实质性承诺或保证，市场有风险，投资需谨慎！本平台任何信息最终解释权归开发者所有!</div>'
+                        });
+                      });
+                      
+                    }, 'json');
+                  break;
+                  case 'guzhi': //发现
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/guzhi', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '股指智能决策'
+                        ,tpl: msg
+                      });
+                      $("#gpimg img").each(function(){
+                            $(this).parent().addClass("thumbnail thumbnail_no_bg");
+                        });
+                      $("#hisbtn2").click(function(){
+                        var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                        $.post('/home/Mobile/guzhi_con', function(ms){
+                          layer.close(loading);
+                          layim.panel({
+                            title: '股指智能决策历史记录'
+                            ,tpl: ms
+                          });
+                          var nDivHight  = $(".layim-content").height();
+                          $(".layim-content").scroll(function () {
+                            nScrollHight = $(this)[0].scrollHeight;
+                            nScrollTop = $(this)[0].scrollTop;
+                            if (nScrollTop + nDivHight >= nScrollHight) {
+                                var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                                var page = $(".his_con").length;
+                                $.post('/home/Mobile/guzhi_con_add',{page:page}, function(mms){
+                                  layer.close(loading);
+                                  $("#his_con").append(mms);
+                                }, 'json');
+                            }
+                          }); 
+                        }, 'json');
+                      });
+                    }, 'json');
+                  break;
+                  case 'qihuo': //发现
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/qihuo', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '期货交易动向'
+                        ,tpl: msg
+                      });
+                      $("#gpimg img").each(function(){
+                            $(this).parent().addClass("thumbnail thumbnail_no_bg");
+                        });
+                      $("#hisbtn3").click(function(){
+                        var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                        $.post('/home/Mobile/qihuo_con', function(ms){
+                          layer.close(loading);
+                          layim.panel({
+                            title: '股指智能决策历史记录'
+                            ,tpl: ms
+                          });
+                          var nDivHight  = $(".layim-content").height();
+                          $(".layim-content").scroll(function () {
+                            nScrollHight = $(this)[0].scrollHeight;
+                            nScrollTop = $(this)[0].scrollTop;
+                            if (nScrollTop + nDivHight >= nScrollHight) {
+                                var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                                var page = $(".his_con").length;
+                                $.post('/home/Mobile/qihuo_con_add',{page:page}, function(mms){
+                                  layer.close(loading);
+                                  $("#his_con").append(mms);
+                                }, 'json');
+                            }
+                          }); 
+                        }, 'json');
+                      });
+                    }, 'json');
+                  break;
+                  case 'beita': //发现
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/beita', function(msg){
+                      layer.close(loading);
+                      layim.panel({
+                        title: '贝塔黑马股'
+                        ,tpl: msg
+                      });
+                      $("#gpimg img").each(function(){
+                            $(this).parent().addClass("thumbnail thumbnail_no_bg");
+                        });
+                      $("#hisbtn1").click(function(){
+                        var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                        $.post('/home/Mobile/beita_con', function(ms){
+                          layer.close(loading);
+                          layim.panel({
+                            title: '股指智能决策历史记录'
+                            ,tpl: ms
+                          });
+                          var nDivHight  = $(".layim-content").height();
+                          $(".layim-content").scroll(function () {
+                            nScrollHight = $(this)[0].scrollHeight;
+                            nScrollTop = $(this)[0].scrollTop;
+                            if (nScrollTop + nDivHight >= nScrollHight) {
+                                var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                                var page = $(".his_con").length;
+                                $.post('/home/Mobile/beita_con_add',{page:page}, function(mms){
+                                  layer.close(loading);
+                                  $("#his_con").append(mms);
+                                }, 'json');
+                            }
+                          }); 
+                        }, 'json');
+                      });
+                    }, 'json');
+                  break;
+                  case 'live':
+                    var loading = layer.load(1, {shade: [0.1,'#fff'] });
+                    $.post('/home/Mobile/live', function(msg){
+                      layer.close(loading);
+                      layim.panel({title: '在线直播',tpl: msg});
+                      var group_id = $("#live_nav").attr("group_id");
+                      $.post('/home/wechat/bindgroup', {id:group_id}, function(gmsg){console.log(gmsg);}, 'json');
+                      $("#play").empty();
+                      var objectPlayer=new mpsPlayer({
+                        container:'play',//播放器容器ID，必要参数
+                        uin: '39950',//用户ID
+                        appId: '7Nzb11HHuHUxxQxX',//播放实例ID
+                        hlsUrl: 'http://cn3.sxyjs.com.cn/ylxx/stream.m3u8',//控制台开通的APP hls地址
+                        rtmpUrl: 'rtmp://cn2.sxyjs.com.cn/ylxx/stream',//控制台开通的APP rtmp地址
+                        width: '100%',//播放器宽度，可用数字、百分比等
+                        height: '100%',//播放器高度，可用数字、百分比等
+                        autostart: true,//是否自动播放，默认为false
+                        controlbardisplay: 'enable',//是否显示控制栏，值为：disable、enable默认为disable。
+                        isclickplay: true,//是否单击播放，默认为false
+                        isfullscreen: true,//是否双击全屏，默认为true
+                        mobilefullscreen: false,//移动端是否全屏，默认为false
+                        enablehtml5: false,//是否优先使用H5播放器，默认为false
+                        isloadcount: 1,//网络波动卡顿loading图标显示(默认1s后)
+                        isdefaultfull:true,
+                        stretching: '1'//设置全屏模式,1代表按比例撑满至全屏,2代表铺满全屏,3代表视频原始大小,默认值为1 
+                      });
+                      $('.emotion').qqFace({id : 'facebox', assign : 'zb_textarea', path :'/public/qqFace/newarclist/'});
+                      var win_height = $(".layim-content").height();
+                      var more_height = 30;//浏览器补位高度
+                      var play = $("#play").height();//图片框高度
+                      var user_box = $("#user_box").height();
+                      var message_send = $("#message_send").height();//发言框高度
+                      $("#message_receive_list").height(win_height-play-user_box-message_send-more_height);//赋值聊天框高度
+                      $.getScript("__PUBLIC__static/home/js/metro-mb-chat.js");
+                      $.getScript("__PUBLIC__static/home/js/metro-mb-date.js");
+                    }, 'json');
+                  break;
+                  case 'logout':
+                    window.location.href = "/home/Sign/mblogout"; 
+                  break;
+                }
+              }); 
+                //获取离线时候的信息
+                setTimeout(function(){ 
+                    $.post('/home/Layim/unonline', function(msg){
+                        if(msg !== "0"){
+                            $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                               layim.getMessage(item);
+                            });
+                        }
+                    }, 'json');
+                }, 1000);
+            });
+        });
+        function Yninit(data){
+            $.post('/home/Wechat/index', {client_id: data.client_id,group_id: "{$group_id}",uid: {$uid}}, function(msg){
+                console.log(msg);
+            }, 'json');
+        } 
+    </script>
+    <script src="__PUBLIC__static/home/js/metro-mb.js?version=2.4.13"></script>
+    <script src="__PUBLIC__static/home/js/metro-electron-mb.js?version=2.4.13"></script>
+{/block}

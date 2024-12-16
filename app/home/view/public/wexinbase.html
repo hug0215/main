@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>  
+    {block name="title"}<title>东泽文化</title>{/block}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/dongze.ico" media="screen" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__static/common/layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+      <script src="/Public/Bootstrap-Metro/Metro/html5shiv.min.js"></script>
+      <script src="/Public/Bootstrap-Metro/Metro/respond.min.js"></script>
+    <![endif]-->
+    <script src="__PUBLIC__static/common/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__static/common/layui/layui.js"></script>
+    <script src="__PUBLIC__static/common/bootstrap/js/bootstrap.min.js"></script>      
+</head>  
+<body style="background: #f2f3f7;">{block name="body"}{/block}
+<script type="text/javascript">
+    (/iphone|ipod|ipad/i.test(navigator.appVersion)) && document.addEventListener('blur', (e) => {
+    // 这里加了个类型判断，因为a等元素也会触发blur事件
+    ['input', 'textarea'].includes(e.target.localName) && document.body.scrollIntoView(false)
+    }, true);
+    // document.addEventListener('touchmove', function (evt) {
+    //     evt.preventDefault();
+    // }, { passive: false });
+</script>
+</body>
+</html>

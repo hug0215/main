@@ -1,0 +1,665 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>查找列表</title>
+<link href="__PUBLIC__layim/dist/css/layui.css" rel="stylesheet">
+<link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="__PUBLIC__static/home/css/style.css?version=2.3.9" rel="stylesheet">
+<link href="__PUBLIC__static/common/css/animate.css" rel="stylesheet" type="text/css"/>
+<style>
+body .layim-chat-main{height: auto;}
+.layim-msgbox{margin:0 10px 10px 10px;}
+.layim-msgbox li{position: relative; margin-bottom: 10px; padding: 0 130px 10px 60px; padding-bottom: 10px; line-height: 22px; border-bottom: 1px dotted #e2e2e2;}
+.layim-msgbox .layim-msgbox-tips{margin: 0; padding: 10px 0; border: none; text-align: center; color: #999;}
+.layim-msgbox .layim-msgbox-system{padding: 0 10px 10px 10px;}
+.layim-msgbox li p span{padding-left: 15px; color: #999;}
+.layim-msgbox li p em{font-style: normal; color: #FF5722;}
+.layim-msgbox-avatar{position: absolute; left: 0; top: 0; width: 60px; height: 60px;}
+.layim-msgbox-user{padding-top: 5px;}
+.layim-msgbox-content{margin-top: 3px;}
+.layim-msgbox .layui-btn-small{padding: 0 15px; margin-left: 5px;}
+.layim-msgbox-btn{position: absolute; right: 0; top: 12px; color: #999;}
+</style>
+</head>
+<body style="background: #fff;">
+    <div class="row mt-tabpage-title navbar navbar-default" style="background: #fff;">
+        <div class="col-xs-12 text-left">
+            <a href="javascript:;" id="content_t" class="mt-tabpage-item">好友分组</a>
+            <a href="javascript:;" id="guzhi_t" class="mt-tabpage-item mt-tabpage-item-cur">添加好友</a>
+            <a href="javascript:;" id="shifo_t" class="mt-tabpage-item">群分组</a>
+            <!-- <a href="javascript:;" id="laobing_t" class="mt-tabpage-item">添加群</a> -->
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="row animated fadeInDown" id="content" style="display: none;padding:0px 10px 10px 10px;">
+          <div class="col-xs-12">
+              <blockquote class="layui-elem-quote">
+                <div class="row">
+                    <div class="col-xs-8">
+                      <div class="form-group">
+                        <input name="addFriendgroup" type="text" class="form-control" placeholder="请输入好友分组名称">
+                      </div>
+                    </div>
+                    <div class="col-xs-4"><button type="button" id="addFriendgroup" class="btn btn-default">创建</button></div>
+                </div>
+              </blockquote>
+              <div class="row">
+                  {volist name="friend" id="vo"}
+                    <div class="col-sm-4 col-md-4 col-lg-2" style="cursor: pointer;padding:8px;">
+                        <div class="bg-success col-xs-12" style="box-shadow: 1px 1px 1px #e6e6e9;padding:20px 10px;">
+                          <div class="col-xs-12">
+                            <h4 style="margin:0 0 5px 0;padding: 0;">{$vo.groupname}</h4>
+                          </div>
+                          <div class="col-xs-12">
+                            <button type="button" class="btn btn-sm btn-success" style="background: #019688;" fzid="{$vo.id}" onclick="addFriendList(this)" role="button">成员操作</button> 
+                            <button type="button" class="btn btn-sm btn-danger" fzid="{$vo.id}" onclick="delFriend(this)" role="button">删除分组</button>
+                          </div>
+                      </div>
+                    </div>
+                {/volist} 
+                </div>
+          </div>
+        </div>
+        <div class="row animated fadeInDown" id="guzhi" style="padding:0px 10px 10px 10px;">
+            <blockquote class="layui-elem-quote">
+                <div class="row">
+                    <div class="col-xs-8">
+                      <div class="form-group">
+                        <input type="text" name="SearchFriend" class="form-control" placeholder="请输入要添加的账号">
+                      </div>
+                    </div>
+                    <div class="col-xs-4"><button type="button" id="SearchFriend" class="btn btn-default">查询</button></div>
+                </div>
+                <div class="row"></div>
+              </blockquote> 
+        </div>
+        <div class="row  animated fadeInDown" id="shifo" style="display: none;padding:0px 10px 10px 10px;">
+            <div class="col-xs-12">
+              <blockquote class="layui-elem-quote">
+                <div class="row">
+                    <div class="col-xs-8 margin-top-20">
+                      <div class="form-group">
+                        <input name="addgrouplist" type="text" class="form-control" placeholder="请输入群分组名称">
+                      </div>
+                      
+                    </div>
+                    <div class="col-xs-2 margin-top-20"><button type="button" id="addgrouplist" class="btn btn-default">创建</button></div>
+                </div>
+              </blockquote>
+              <div class="row">
+                  {volist name="group" id="vo"}
+                    <div class="col-sm-4 col-md-4 col-lg-2" style="cursor: pointer;padding:8px;">
+                        <div class="bg-success col-xs-12" style="box-shadow: 1px 1px 1px #e6e6e9;padding:20px 10px;">
+                          <div class="col-xs-12">
+                            <h4 style="margin:0 0 5px 0;padding: 0;">{$vo.groupname}</h4>
+                          </div>
+                          <div class="col-xs-12">
+                            <button type="button" class="btn btn-sm btn-success" style="background: #019688;" fzid="{$vo.id}" groupname="{$vo.groupname}" groupimg="{$vo.avatar}" onclick="addFriendListgroup(this)" role="button">成员操作</button> 
+                            <button type="button" class="btn btn-sm btn-danger" fzid="{$vo.id}" groupname="{$vo.groupname}" onclick="delFriendListgroup(this)" role="button">删除分组</button>
+                            <button type="button" class="btn btn-sm btn-danger" fzid="{$vo.id}" groupname="{$vo.groupname}" onclick="jurisdiction(this)" role="button">设置权限</button>
+                          </div>
+                      </div>
+                    </div>
+                  {/volist} 
+                </div>
+          </div> 
+        </div>
+        <!-- <div class="row  animated fadeInDown" id="laobing" style="display: none;padding:0px 10px 10px 10px;"></div> -->
+    </div>
+<!-- 
+上述模版采用了 laytpl 语法，不了解的同学可以去看下文档：http://www.layui.com/doc/modules/laytpl.html
+-->
+<!-- <script src="__PUBLIC__layim/dist/layui.js"></script> -->
+<script type="text/javascript" src="__PUBLIC__static/common/jquery-2.1.1.min.js"></script>
+<script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+<script src="__PUBLIC__static/common/layer/layer.js"></script>
+<script type="text/javascript">
+  $("#content_t").click(function(){
+      $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+      $("#content").show().siblings().hide();
+  });
+  $("#guzhi_t").click(function(){
+      $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+      $("#guzhi").show().siblings().hide();
+  });
+  $("#shifo_t").click(function(){
+      $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+      $("#shifo").show().siblings().hide();
+  });
+  $("#laobing_t").click(function(){
+      $(this).addClass("mt-tabpage-item-cur").siblings("a").removeClass("mt-tabpage-item-cur");
+      $("#laobing").show().siblings().hide();
+  });
+
+  function jurisdiction(obj){
+    var fzid = $(obj).attr("fzid");
+    var groupname = $(obj).attr("groupname");
+    var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/jurisdiction', {fzid:fzid}, function(msg){
+        layer.close(load);    
+        // console.log(msg);
+        var szsh = layer.open({
+          type: 1,
+          title: '设置审核人员',
+          skin: 'layui-layer-rim', //加上边框
+          area: ['820px', '350px'], //宽高
+          content: msg
+        });
+        $("#jursearch").click(function(){
+            var SearchFriend = $('input[name="juSearchFriend"]').val();
+            if(SearchFriend == ""){layer.msg('搜索框不能为空！');return false;}
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/juSearchFriend', {SearchFriend:SearchFriend}, function(msg){
+              layer.close(load);  
+              if(msg == "0"){layer.msg('对不起，查找不到该用户！');return false;}
+              $("#juSearchcontent").empty().append(msg);
+              $(".jusuresz").click(function(){
+                  var avatar = $(this).attr("avatar");
+                  var username = $(this).attr("username");
+                  var fid = $(this).attr("fid");
+                  var load = layer.load(2, {shade: [0.1,'#fff']});
+                  $.post('/home/Layim/juAddFriend', {avatar:avatar,username:username,fid:fid,groupname:groupname,fzid:fzid}, function(msg){
+                    layer.close(load);  
+                      if(msg == "0"){layer.msg('该群组已经设置了审核员，请勿重复操作');return false;}
+                      if(msg == "2"){layer.msg('设置审核人员失败');return false;}
+                      layer.msg('设置成功');
+                      layer.close(szsh);
+                  }, 'json');
+              });
+            }, 'json');
+        });
+        $("#delshy").click(function(){
+          var jid =$(this).attr("jid");
+          var fzid =$(this).attr("fzid");
+          if(jid){
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/judelshy', {jid:jid,fzid:fzid}, function(msg){
+                layer.close(load);  
+                if(msg == "0"){layer.msg('删除失败');return false;}
+                layer.msg('删除成功');
+                layer.close(szsh);
+              }, 'json');
+          }else{
+            layer.msg('该群还未设置审核员');
+          }
+
+        });
+
+      }, 'json'); 
+  }
+
+  //查找好友
+  $("#SearchFriend").click(function(){
+      var SearchFriend = $('input[name="SearchFriend"]').val();
+      if(SearchFriend == ""){layer.msg('搜索框不能为空！');return false;}
+      var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/SearchFriend', {SearchFriend:SearchFriend}, function(msg){
+        layer.close(load);    
+        console.log(msg);
+        if(msg == "0"){layer.msg('对不起，查找不到该用户！');return false;}
+        $("#SearchFriend").parent().parent().siblings().html(msg);
+      }, 'json');
+    });
+  //添加好友
+  function addFriend(obj) {
+    var fid = $(obj).attr("fid");
+    var load = layer.load(2, {shade: [0.1,'#fff']});
+    $.post('/home/Layim/addFriend', {fid:fid}, function(msg){
+        layer.close(load);    
+        console.log(msg);
+        if(msg == "0"){layer.msg('您还没分组，请先创建后再进行操作！');return false;}
+        if(msg == "1"){layer.msg('您已添加该好友，请勿重复进行操作！');return false;}
+        var layff =layer.open({
+                      type: 1,
+                      title: "添加好友",
+                      skin: 'layui-layer-rim', //加上边框
+                      area: ['420px', '180px'], //宽高
+                      content: msg
+                    });
+        $("#addFriendchange_a").click(function(){
+            var addFriendval = $("#selectaddFriend").val();
+            var addFriendtext = $("#selectaddFriend").find("option:selected").text();
+            // console.log(fid);
+            if(addFriendval == "0"){layer.msg('请选择一个分组！');return false;}
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/addFriendchange', {fid:fid,addFriendval:addFriendval,addFriendtext:addFriendtext}, function(msg){
+              console.log(msg);
+              if(msg == "0"){layer.msg('添加好友失败，请重新加载系统后重试！');layer.close(load);}else{
+                layer.msg('添加好友成功！');
+                layer.close(load);
+                layer.close(layff);
+                parent.layui.layim.addList(msg[0]);
+                //添加成功后发送layim进行相应的页面加好友操作
+                $.post('/home/Wechat/addfriend', {type:msg[1]["type"],avatar:msg[1]["avatar"],username:msg[1]["username"],groupid:msg[1]["groupid"],id: msg[1]["id"],sign:msg[1]["sign"],selfid:msg[1]["selfid"]}, function(msg){
+                    console.log(msg);
+                }, 'json');
+              }
+            }, 'json');
+        });
+      }, 'json');
+  }
+  //添加好友分组
+  $("#addFriendgroup").click(function(){
+      var addFriendgroup = $('input[name="addFriendgroup"]').val();
+      if(addFriendgroup == ""){layer.msg('分组名称不能为空！');return false;}
+      var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/addFriendgroup', {addFriendgroup:addFriendgroup}, function(msg){
+        layer.close(load);    
+        console.log(msg);
+        if(msg == "0"){layer.msg('分组名称重复，请重新输入！');return false;}
+        if(msg == "1"){layer.msg('数据保存失败，请重新加载系统后重试！');return false;}
+        $("#addFriendgroup").parent().parent().parent().siblings().append(msg);
+        parent.window.location.href = parent.window.location.origin+parent.window.location.pathname+"?aid="+10000*Math.random();
+      }, 'json');
+    });
+  //好友组列表操作
+  //添加组成员
+  function addFriendList(obj) {
+    var fzid = $(obj).attr("fzid");
+    var load = layer.load(2, {shade: [0.1,'#fff']});
+    $.post('/home/Layim/SearchFriendList', {fzid:fzid}, function(msg){
+        layer.close(load);    
+        // console.log(msg);
+        if(msg == "0"){layer.msg('您还没好友，请先添加好友后再进行操作！');return false;}
+        layer.open({
+          type: 1,
+          title: "组成员操作",
+          skin: 'layui-layer-rim', //加上边框
+          area: ['820px', '450px'], //宽高
+          content: msg
+        });
+         // 全选/反选
+        $("#checkall").on('change', function () {
+            let check = this.checked;
+            if (check) {
+              $("#checklist").find(":checkbox").each(function() { 
+                  this.checked = !this.checked; 
+              });
+            } else {
+              $("#checklist").find(":checkbox").each(function() {
+                  this.checked = !this.checked; 
+              });
+            }
+        });
+        //单个转移
+        $(".changezy").click(function(){
+          var limits = [];
+          var changezy = $(this).attr("uid");
+          limits.push(changezy);
+          var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/moveFriend', function(msg){
+                layer.close(load);    
+                // console.log(msg);
+                if(msg == "0"){layer.msg('您还没分组，请先创建后再进行操作！');return false;}
+                if(msg == "1"){layer.msg('您已添加该好友，请勿重复进行操作！');return false;}
+                var layff =layer.open({
+                              type: 1,
+                              title: "转移好友",
+                              skin: 'layui-layer-rim', //加上边框
+                              area: ['420px', '180px'], //宽高
+                              content: msg
+                            });
+                $("#addFriendchange_a").click(function(){
+                    var addFriendval = $("#selectaddFriend").val();
+                    var addFriendtext = $("#selectaddFriend").find("option:selected").text();
+                    if(addFriendval == "0"){layer.msg('请选择一个分组！');return false;}
+                    if(addFriendval == fzid){layer.msg('请选择一个不同的分组！');return false;}
+                    var load = layer.load(2, {shade: [0.1,'#fff']});
+                    $.post('/home/Layim/friendmove', {limits:JSON.stringify(limits),fzid:fzid,xfzid:addFriendval,groupname:addFriendtext}, function(fmsg){
+                      // console.log(fmsg);
+                      layer.close(load);
+                      if(msg == "0"){
+                        layer.msg('转移好友失败，请重新加载系统后重试！');
+                      }else{
+                        layer.msg('转移好友成功！');
+                        layer.close(layff);
+                        parent.window.location.href = parent.window.location.origin+parent.window.location.pathname;
+                      }
+                    }, 'json');
+                });
+              }, 'json');
+        });
+        //全部转移
+        $("#checkchangeall").click(function(){
+            var limits = [];
+            $("#checklist").find(":checkbox").each(function(){
+                if($(this).is(':checked')) {
+                    limits.push($(this).val());
+                }
+            });
+            if(limits == ""){layer.msg('请勾选要转移的好友！');return false;}
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/moveFriend', function(msg){
+                layer.close(load);    
+                // console.log(msg);
+                if(msg == "0"){layer.msg('您还没分组，请先创建后再进行操作！');return false;}
+                if(msg == "1"){layer.msg('您已添加该好友，请勿重复进行操作！');return false;}
+                var layff =layer.open({
+                              type: 1,
+                              title: "转移好友",
+                              skin: 'layui-layer-rim', //加上边框
+                              area: ['420px', '180px'], //宽高
+                              content: msg
+                            });
+                $("#addFriendchange_a").click(function(){
+                    var addFriendval = $("#selectaddFriend").val();
+                    var addFriendtext = $("#selectaddFriend").find("option:selected").text();
+                    if(addFriendval == "0"){layer.msg('请选择一个分组！');return false;}
+                    if(addFriendval == fzid){layer.msg('请选择一个不同的分组！');return false;}
+                    var load = layer.load(2, {shade: [0.1,'#fff']});
+                    $.post('/home/Layim/friendmove', {limits:JSON.stringify(limits),fzid:fzid,xfzid:addFriendval,groupname:addFriendtext}, function(fmsg){
+                      // console.log(fmsg);
+                      layer.close(load);
+                      if(msg == "0"){
+                        layer.msg('转移好友失败，请重新加载系统后重试！');
+                      }else{
+                        layer.msg('转移好友成功！');
+                        layer.close(layff);
+                        parent.window.location.href = parent.window.location.origin+parent.window.location.pathname;
+                      }
+                    }, 'json');
+                });
+              }, 'json');
+        });
+        //单个删除
+        $(".changedl").click(function(){
+          var limits = [];
+          var changedl = $(this).attr("uid");
+          limits.push(changedl);
+          var load = layer.load(2, {shade: [0.1,'#fff']});
+              $.post('/home/Layim/delallFriend',{limits:JSON.stringify(limits),fzid:fzid}, function(dmsg){
+                console.log(dmsg);
+                layer.close(load);
+                if(dmsg == "0"){
+                    layer.msg('删除失败，请重新加载系统后重试！');
+                  }else{
+                    layer.msg('删除好友成功！');
+                    $.each(dmsg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                      // console.log(item);
+                       $.post('/home/Wechat/flashwin', {type:item["type"],id:item["fzid"],uid:item["uid"],fid:item["fid"]}, function(msg){
+                            console.log(msg);
+                        }, 'json');
+                    });
+                    parent.window.location.href = parent.window.location.origin+parent.window.location.pathname;
+                  }
+              }, 'json');
+        });
+        //全部删除
+        $("#checkdelall").click(function(){
+            var lcon = layer.confirm('确认删除该好友？', {
+              btn: ['确定','取消'] //按钮
+            }, function(){
+              layer.close(lcon);
+              var limits = [];
+              $("#checklist").find(":checkbox").each(function(){
+                  if($(this).is(':checked')) {
+                      limits.push($(this).val());
+                  }
+              });
+              if(limits == ""){layer.msg('请勾选要删除的好友！');return false;}
+              var load = layer.load(2, {shade: [0.1,'#fff']});
+              $.post('/home/Layim/delallFriend',{limits:JSON.stringify(limits),fzid:fzid}, function(dmsg){
+                console.log(dmsg);
+                layer.close(load);
+                if(dmsg == "0"){
+                    layer.msg('删除失败，请重新加载系统后重试！');
+                  }else{
+                    layer.msg('删除好友成功！');
+                    $.each(dmsg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                      // console.log(item);
+                       $.post('/home/Wechat/flashwin', {type:item["type"],id:item["fzid"],uid:item["uid"],fid:item["fid"]}, function(msg){
+                            console.log(msg);
+                        }, 'json');
+                    });
+                    parent.window.location.href = parent.window.location.origin+parent.window.location.pathname;
+                  }
+              }, 'json');
+            }, function(){
+              layer.close(lcon);
+            });
+        });
+      }, 'json');
+  }
+  //删除组成员
+  function delFriendList(obj) {
+    var fzid = $(obj).attr("fzid");
+    var load = layer.load(2, {shade: [0.1,'#fff']});
+    $.post('/home/Layim/SearchFriendList', {fzid:fzid}, function(msg){
+        layer.close(load);    
+        console.log(msg);
+        if(msg == "0"){layer.msg('您还没分组，请先创建后再进行操作！');return false;}
+        layer.open({
+          type: 1,
+          title: "添加好友",
+          skin: 'layui-layer-rim', //加上边框
+          area: ['420px', '180px'], //宽高
+          content: msg
+        });
+      }, 'json');
+  }
+  //删除组
+  function delFriend(obj) {
+    var lcon = layer.confirm('确认删除该分组？', {
+      btn: ['确定','取消'] //按钮
+    }, function(){
+      layer.close(lcon);
+      var fzid = $(obj).attr("fzid");
+      var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/delFriend', {fzid:fzid}, function(msg){
+        layer.close(load);
+        console.log(msg);
+        if(msg == "0"){layer.msg('删除失败，请稍后重新操作！');return false;}else{
+          layer.msg('删除成功！', {icon: 1});
+        }
+        $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+          // console.log(item);
+           $.post('/home/Wechat/flashwin', {type:item["type"],id:item["fzid"],uid:item["uid"],fid:item["fid"]}, function(msg){
+                console.log(msg);
+            }, 'json');
+        });
+        parent.window.location.href = parent.window.location.origin+parent.window.location.pathname;
+      }, 'json');
+    }, function(){
+      layer.close(lcon);
+    });
+  }
+
+  function getObjectURL(file) {
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
+
+//添加好友分组
+  $("#addgrouplist").click(function(){
+      var addgrouplist = $('input[name="addgrouplist"]').val();
+      if(addgrouplist == ""){layer.msg('群分组名称不能为空！');return false;}
+      var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/addgrouplist', {addgrouplist:addgrouplist}, function(msg){
+        layer.close(load);    
+        // console.log(msg);
+        if(msg == "0"){layer.msg('分组名称重复，请重新输入！');return false;}
+        if(msg == "1"){layer.msg('数据保存失败，请重新加载系统后重试！');return false;}
+        $("#addgrouplist").parent().parent().parent().siblings().append(msg[1]);
+        var a = {
+          type: 'group' //列表类型，只支持friend和group两种
+          ,avatar: msg[0]["avatar"] //好友头像
+          ,groupname: msg[0]["groupname"] //好友昵称
+          ,id: msg[0]["id"] //好友id
+        }        
+        parent.layui.layim.addList(a);
+        console.log(msg[0]["id"]);
+        //将当前的群组ID跟当前用户的clientid进行绑定；
+        $.post('/home/wechat/bindgroup', {id:msg[0]["id"]}, function(gmsg){
+          console.log(gmsg);
+        }, 'json');
+      }, 'json');
+    });
+  //好友组列表操作
+  //添加组成员
+  function addFriendListgroup(obj) {
+    var fzid = $(obj).attr("fzid");
+    var groupname = $(obj).attr("groupname");
+    var groupimg = $(obj).attr("groupimg");
+    var load = layer.load(2, {shade: [0.1,'#fff']});
+    $.post('/home/Layim/addFriendListgroup', {fzid:fzid,groupname:groupname}, function(msg){
+        layer.close(load);    
+        // console.log(msg);
+        if(msg == "0"){layer.msg('您还没好友，请先添加好友后再进行操作！');return false;}
+        var qcy = layer.open({
+          type: 1,
+          title: "群成员操作",
+          skin: 'layui-layer-rim', //加上边框
+          area: ['820px', '450px'], //宽高
+          content: msg
+        });
+        //添加单人好友到群组
+        $(".addsinglegroup").click(function(){
+          var limits = [];
+          var lim = $(this).attr("uid");
+          limits.push(lim);
+          var load = layer.load(2, {shade: [0.1,'#fff']});
+          $.post('/home/Layim/addgroupbyfriend',{limits:JSON.stringify(limits),fzid:fzid,groupname:groupname,groupimg:groupimg},function(msg){
+              layer.close(load);    
+              console.log(msg);
+              if(msg == "0"){layer.msg('添加失败，请稍后重新操作！');return false;}else{
+                layer.msg('添加成功！');layer.close(qcy);
+              }
+              $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                 $.post('/home/Wechat/addgroup', {type:"group",groupimg:groupimg,avatar:item["avatar"],groupname:item["groupname"],id:item["fzid"],sendid:item["uid"]}, function(msg){
+                      console.log(msg);
+                  }, 'json');
+              });
+            }, 'json');
+        });
+         // 全选/反选 添加
+        $("#checkall").on('change', function () {
+            let check = this.checked;
+            if (check) {
+              $("#checklist").find(":checkbox").each(function() { 
+                  this.checked = !this.checked; 
+              });
+            } else {
+              $("#checklist").find(":checkbox").each(function() {
+                  this.checked = !this.checked; 
+              });
+            }
+        });
+        $("#checkchangeall").click(function(){
+            var limits = [];
+            $("#checklist").find(":checkbox").each(function(){
+                if($(this).is(':checked')) {
+                    limits.push($(this).val());
+                }
+            });
+            if(limits == ""){layer.msg('请选择一个好友！');return false;}
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/addgroupbyfriend',{limits:JSON.stringify(limits),fzid:fzid,groupname:groupname,groupimg:groupimg},function(msg){
+                layer.close(load);    
+                console.log(msg);
+                if(msg == "0"){layer.msg('添加失败，请稍后重新操作！');return false;}else{
+                  layer.msg('添加成功！');layer.close(qcy);
+                }
+                $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                   $.post('/home/Wechat/addgroup', {type:"group",groupimg:groupimg,avatar:item["avatar"],groupname:item["groupname"],id:item["fzid"],sendid:item["uid"]}, function(msg){
+                        console.log(msg);
+                    }, 'json');
+                });
+              }, 'json');
+        });
+
+        //群组移除单人
+        $(".delsinglegroup").click(function(){
+            var limitsdel = [];
+            var limits = $(this).attr("uid");
+            limitsdel.push(limits);
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/addgroupbyfrienddel',{limitsdel:JSON.stringify(limitsdel),fzid:fzid,groupname:groupname,groupimg:groupimg},function(msg){
+              layer.close(load);    
+              console.log(msg);
+              if(msg == "0"){layer.msg('移除失败，请稍后重新操作！');return false;}else{
+                layer.msg('移除成功！');layer.close(qcy);
+              }
+              $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                 $.post('/home/Wechat/leavegroup', {type:item["type"],id:item["fzid"],sendid:item["uid"]}, function(msg){
+                      console.log(msg);
+                  }, 'json');
+              });
+            }, 'json');
+        });
+         // 全选/反选 删除
+        $("#checkalldel").on('change', function () {
+            let check = this.checked;
+            if (check) {
+              $("#checklistdel").find(":checkbox").each(function() { 
+                  this.checked = !this.checked; 
+              });
+            } else {
+              $("#checklistdel").find(":checkbox").each(function() {
+                  this.checked = !this.checked; 
+              });
+            }
+        });
+        $("#checkchangealldel").click(function(){
+            var limitsdel = [];
+            $("#checklistdel").find(":checkbox").each(function(){
+                if($(this).is(':checked')) {
+                    limitsdel.push($(this).val());
+                }
+            });
+            if(limitsdel == ""){layer.msg('请选择一个好友！');return false;}
+            var load = layer.load(2, {shade: [0.1,'#fff']});
+            $.post('/home/Layim/addgroupbyfrienddel',{limitsdel:JSON.stringify(limitsdel),fzid:fzid,groupname:groupname,groupimg:groupimg},function(msg){
+                layer.close(load);    
+                console.log(msg);
+                if(msg == "0"){layer.msg('移除失败，请稍后重新操作！');return false;}else{
+                  layer.msg('移除成功！');layer.close(qcy);
+                }
+                $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+                   $.post('/home/Wechat/leavegroup', {type:item["type"],id:item["fzid"],sendid:item["uid"]}, function(msg){
+                        console.log(msg);
+                    }, 'json');
+                });
+              }, 'json');
+        });
+
+      }, 'json');
+  }
+
+  //删除分组
+  function delFriendListgroup(obj)
+  {
+    var lcon = layer.confirm('确认删除该分组？', {
+      btn: ['确定','取消'] //按钮
+    }, function(){
+      layer.close(lcon);
+      var fzid = $(obj).attr("fzid");
+      var load = layer.load(2, {shade: [0.1,'#fff']});
+      $.post('/home/Layim/delFriendListgroup', {fzid:fzid}, function(msg){
+        layer.close(load);
+        console.log(msg);
+        if(msg == "0"){layer.msg('删除失败，请稍后重新操作！');return false;}else{
+          layer.msg('删除成功！', {icon: 1});
+        }
+        $.each(msg,function(i,item){ //两个参数，第一个参数表示下标，第二个参数表示一维数组中的每一个数组
+           $.post('/home/Wechat/leavegroup', {type:item["type"],id:item["fzid"],sendid:item["uid"]}, function(msg){
+                console.log(msg);
+            }, 'json');
+        });
+      }, 'json');
+    }, function(){
+      layer.close(lcon);
+    });
+  }
+
+</script>
+</body>
+</html>

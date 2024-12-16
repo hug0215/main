@@ -1,0 +1,17 @@
+{extend name="public/wexinbase"/}
+{block name="title"}<title>{$list.title}</title>{/block}
+{block name="body"}
+<div class="container">
+    <div class="row animated fadeInDown cursor" id="content">
+        <div class="col-xs-12" style="cursor: pointer;">
+             <div style="text-align:left;">{$list.day}</div>
+             <div id="gpimg" style="text-align:left;">{$list.content}</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$("#gpimg img").each(function(){
+    $(this).parent().addClass("thumbnail thumbnail_no_bg");
+});
+</script>
+{/block}

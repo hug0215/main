@@ -1,0 +1,225 @@
+{extend name="public/wexinbase"/}
+{block name="body"}
+<style>body{background: #fff;}</style>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" >
+  <div class="container" style="text-align: center;padding:0;font-size: 12px;color:#7d7d7d;">
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+       <a style="color:#ff5a00;text-decoration:none;" href="{:url('/wechat')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+            <img style="height: 20px;" src='__PUBLIC__static/home/atgwximg/athy.png' />
+          </div>
+          首页
+        </a>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/aitaovip')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+            <img style="height: 20px;" src='__PUBLIC__static/home/atgwximg/atvipb.png' />
+          </div>
+          爱淘Vip
+         </a>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <div class="dropup" >
+          <div class="col-xs-12" style="padding: 2px 0">
+          <img style="height: 20px;" src='__PUBLIC__static/home/atgwximg/atfwb.png' />
+        </div>
+          <button class="dropdown-toggle" style="background: none;border:none;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            爱淘服务
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a id="atlive" href="#">爱淘直播</a></li>
+            <li><a href="http://kf.skyfollowsnow.pro/s/229436nvh">名师互动</a></li>
+            <li><a id="atshq" href="#">大咖生活圈</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id="atshop" href="#">爱淘商城</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-3" style="padding: 3px 0 0 0;">
+        <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/aitaomine')}">
+          <div class="col-xs-12" style="padding: 2px 0">
+            <img style="height: 20px;" src='__PUBLIC__static/home/atgwximg/atmb.png' />
+          </div>
+          我的
+        </a>
+      </div>
+  </div>
+</nav>
+<div style="position: absolute;top:0;left: 0;height: 180px;width: 100%;border-bottom-right-radius:15px;border-bottom-left-radius:15px; background:url(__PUBLIC__static/home/atgwximg/atgbg.png)  0px 0px / 100% 100%  no-repeat; "></div>
+<div style="height: 200px;padding:15px 15px 10px 15px;" class="swiper-container" id="swiper1">
+    <div class="swiper-wrapper">
+        <!-- 下面是4个不同颜色的轮播滑块 -->
+        <div style="background: url(__PUBLIC__static/home/atgwximg/banner5.jpg)  0px 0px / 100% 100%  no-repeat;border-bottom-right-radius:15px;border-bottom-left-radius:15px;" class="swiper-slide"></div>
+        <div style="background: url(__PUBLIC__static/home/atgwximg/banner7.jpg)  0px 0px / 100% 100%  no-repeat;border-bottom-right-radius:15px;border-bottom-left-radius:15px;" class="swiper-slide"></div>
+        <div style="background: url(__PUBLIC__static/home/atgwximg/banner8.jpg)  0px 0px / 100% 100%  no-repeat;border-bottom-right-radius:15px;border-bottom-left-radius:15px;" class="swiper-slide"></div>
+        <div style="background: url(__PUBLIC__static/home/atgwximg/banner9.jpg)  0px 0px / 100% 100%  no-repeat;border-bottom-right-radius:15px;border-bottom-left-radius:15px;" class="swiper-slide"></div>
+    </div>
+    <div class="swiper-pagination"></div><!--分页器（就是4个点点）-->
+</div>
+<div style="height: 180px;margin-top: 10px;padding:0 10px;" class="swiper-container" id="swiper2">
+    <div class="swiper-wrapper">
+        <div style="background-color: none;text-align: center;padding:0 10px;" class="swiper-slide">
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+          <div class="row margin-bottom-10">
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="5" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>5))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/xxjd.png' />
+                </div>
+                重磅消息解读
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="7" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>7))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/ydld.png' />
+                </div>
+                异动雷达
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="2" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>2))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/dt.png' />
+                </div>
+                证券新闻
+              </a>
+            </div>
+          </div>
+          <div class="row margin-top-20">
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="4" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/shequ')}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/dx.png' />
+                </div>
+                爱淘社区
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="6" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>6))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/jhjj.png' />
+                </div>
+                集合竞价
+              </a>
+            </div> 
+            
+          </div>
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+        </div>
+        <div style="background-color: none;text-align:center;padding:0 10px;" class="swiper-slide">
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+          <div class="row margin-bottom-10">
+            <div class="col-xs-3" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="8" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>8))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/wc1.png' />
+                </div>
+                午参
+              </a>
+            </div>
+            <div class="col-xs-3" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="11" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>11))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/wc2.png' />
+                </div>
+                晚参
+              </a>
+            </div> 
+            <div class="col-xs-3" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="9" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>9))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/zjsdb.png' />
+                </div>
+                直击十点半
+              </a>
+            </div> 
+            <div class="col-xs-3" style="padding: 3px 0 0 0;">
+              <a onclick="atreadnum(this)" aid="10" style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/atimg',array('aid'=>10))}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/ldb.png' />
+                </div>
+                直击两点半
+              </a>
+            </div>
+          </div>
+          <div class="row margin-top-20">
+              <div class="col-xs-3" style="padding: 3px 0 0 0;">
+                <a onclick="atreadnum(this)" aid="20" style="color:#7d7d7d;text-decoration:none;" href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=1&sn=a2ff2f5e4ac5c1037270848ec1e78498&scene=18#wechat_redirect">
+                  <div class="col-xs-12" style="padding: 2px 0">
+                    <img style="height: 40px;" src='__PUBLIC__static/home/atgwximg/jj.png' />
+                  </div>
+                  点金决策
+                </a>
+              </div> 
+            </div>
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+        </div>
+       
+    </div>
+    <div class="swiper-pagination"></div><!--分页器（就是4个点点）-->
+</div>
+ <a style="text-decoration:none;" href="https://reborn.acequant.cn/market">
+<div class="col-xs12" style="height: 100px;width: 100%; background:url(__PUBLIC__static/home/atgwximg/taokt2.png)  0px 0px / 100% 100%  no-repeat; box-shadow: 0px 5px 5px #af351b;margin-bottom:4px;">
+</div>
+</a>
+<div class="col-xs12" style="height: 290px;width: 100%;border-bottom-right-radius:15px;border-bottom-left-radius:15px; background:url(__PUBLIC__static/home/atgwximg/atbg1.png)  0px 0px / 100% 100%  no-repeat; margin:0 0 20px 0;">
+  <div class="col-xs-12"><img style="height: 30px;margin-top:10px;" src="__PUBLIC__static/home/atgwximg/attj1.png"></div>
+  <div class="col-xs-12">
+    <div class="col-xs-6 thumbnail" style="background: none;border:none;margin-bottom:0;"> <a onclick="atreadnum(this)" aid="21" style="text-decoration:none;" href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=5&sn=130b151603e6cb5a9949fbf0c0cb0084&scene=18#wechat_redirect"><img style="box-shadow: 0px 5px 8px #af351b;border-radius:5px;" src="__PUBLIC__static/home/atgwximg/attj2.png"></a></div>
+    <div class="col-xs-6 thumbnail" style="background: none;border:none;margin-bottom:0;"><a onclick="atreadnum(this)" aid="22" style="text-decoration:none;" href="{:url('Wexin/shequ')}"><img style="box-shadow: 0px 5px 8px #af351b;border-radius:5px;" src="__PUBLIC__static/home/atgwximg/attj3.png"></a></div>
+  </div>
+  <div class="col-xs-12">
+    <div class="col-xs-6 col-padding-0">
+      <div class="col-xs-6 thumbnail" style="background: none;border:none;">
+        <a onclick="atreadnum(this)" aid="23" style="text-decoration:none;" href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=3&sn=6f081f443207bcfdc2e4d118037c9bdf&scene=18#wechat_redirect
+"><img style="box-shadow: 0px 5px 8px #af351b;border-radius:5px;" src="__PUBLIC__static/home/atgwximg/attj4.png"></a>
+      </div>
+      <div class="col-xs-6 thumbnail" style="background: none;border:none;">
+        <a onclick="atreadnum(this)" aid="24" style="text-decoration:none;" href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=6&sn=d41e7d1e33270d5ccca2455a9bdfe329&scene=18#wechat_redirect"><img style="box-shadow: 0px 5px 8px #af351b;border-radius:5px;" src="__PUBLIC__static/home/atgwximg/attj5.png"></a>
+      </div>
+    </div>
+    <div class="col-xs-6 thumbnail" style="background: none;border:none;"><a onclick="atreadnum(this)" aid="25" style="text-decoration:none;" href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=7&sn=406adf91d1317ba4d8af7ab633ae81b2&scene=18#wechat_redirect"><img style="box-shadow: 0px 5px 8px #af351b;border-radius:5px;" src="__PUBLIC__static/home/atgwximg/attj6.png"></a></div>
+  </div>
+</div>
+<script>
+var swiper = new Swiper('#swiper1', {
+  effect : 'cube',
+  centeredSlides: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+var swiper = new Swiper('#swiper2', {
+  centeredSlides: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
+$("#lhj").click(function(){
+  layer.open({
+    content: '正在构建尽请期待...'
+    ,skin: 'msg'
+    ,time: 2 //2秒后自动关闭
+  });
+});
+function atreadnum(obj)
+{
+  var aid = $(obj).attr("aid");
+  $.post('/home/Wexin/atreadnum',{aid:aid},function(mms){
+      }, 'json');
+}
+</script>
+{/block}

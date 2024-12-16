@@ -1,0 +1,13 @@
+{extend name="public/videobase"/}
+{block name="title"}<title>{$list.vdo_name}</title>{/block}
+{block name="body"}
+    <div class="container" style="cursor: pointer;">
+        <div class="col-md-12" style="padding: 0;">
+            <video id='myvedio' style="width:100%;" vid="{$list.id}" src="{$list.vdo_url}" poster="{$list.pic_url}" controls="controls" controlslist="nodownload"></video>
+        </div>
+        <div class="col-md-12">
+            <p>课程名称：{$list.vdo_name} </p>
+            <p>演讲老师：{$list.teacher}</p>
+        </div>  
+    </div>
+{/block}

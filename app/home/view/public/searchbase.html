@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        {block name="title"}<title>CRM客户管理系统</title>{/block}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0，maximum-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" type="image/x-icon" href="/firstlogo.ico" media="screen" />
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link href="__PUBLIC__static/common/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/common/dist/notyf.min.css" rel="stylesheet" type="text/css"/>
+        <link href="__PUBLIC__static/home/css/style.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="/Public/Bootstrap-Metro/Metro/html5shiv.min.js"></script>
+          <script src="/Public/Bootstrap-Metro/Metro/respond.min.js"></script>
+        <![endif]-->
+        <script src="__PUBLIC__static/common/jquery-3.2.1.min.js"></script>
+        <script src="__PUBLIC__static/common/bootstrap/js/bootstrap.min.js"></script>
+        <script src="__PUBLIC__static/common/layer/layer.js"></script>
+        <script src="__PUBLIC__static/common/jquery.form.js"></script>
+        <script src="__PUBLIC__static/common/metisMenu/hplus.js"></script>
+        <script src="__PUBLIC__static/common/metisMenu/jquery.metisMenu.js"></script>
+        <script src="__PUBLIC__static/common/laydate/laydate.js"></script>
+        <script src="__PUBLIC__static/common/common.js"></script>
+        <script src="__PUBLIC__static/common/dist/notyf.min.js"></script>
+    </head>    
+    <body>
+        <div class="container-fiuld" id="wrapper">
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="nav-header">
+                            <div class="dropdown profile-element"> <span>
+                                <img alt="image" class="img-circle" src="__PUBLIC__static/home/img/profile_small.jpg" />
+                                 </span>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{$account}</strong>
+                                 </span> <span class="text-muted text-xs block">{$username} <b class="caret"></b></span> </span>
+                                </a>
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <li onclick="user_data(this)"><a href="#">个人资料</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="{:url('Sign/logout')}">安全退出</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="logo-element">
+                                W+
+                            </div>
+                        </li>
+                        <li>
+                        <a href="{:url('Index/index')}"><i class="fa fa-home"></i> <span class="nav-label">CRM首页</span></a></li>
+                        <li>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">资源中心</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Resource/index')}">资料录入</a>
+                                </li>
+                                <li><a href="{:url('Resource/res_list')}">资源清单</a>
+                                </li>
+                                <li><a href="{:url('Resource/res_yanzi')}">验资客户</a>
+                                </li>
+                                <li><a href="{:url('Resource/res_ydao')}">引导签约</a>
+                                </li>
+                                <li><a href="{:url('Resource/res_over')}">成交客户</a>
+                                </li>
+                                <li>
+                                    <a href="#">全部资源<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="{:url('Resource/res_fzr')}">验资列表</a>
+                                        <li>
+                                            <a href="{:url('Resource/res_fzr_zy')}">资源列表</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                                </li>
+                                 <li><a href="{:url('Resource/res_zyc')}">资源海</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">黑名单</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{:url('Blacklist/index')}">黑名单录入</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Blacklist/blist')}">黑名单列表</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Blacklist/no_open')}">不再开发客户名单</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客服中心</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">市场部<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="{:url('Customer/index')}">验资</a>
+                                        </li>
+                                        <li><a href="{:url('Customer/compliance')}">合规审核</a>
+                                        </li>
+                                        <!-- <li><a href="{:url('Customer/audit')}">审计核单</a>
+                                        </li>
+                                        <li><a href="{:url('Customer/kefu')}">客服回访</a>
+                                        </li> -->
+                                        <li><a href="{:url('Customer/bm_fzr')}">工单转让</a>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">导师部<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="{:url('Customer/index_u')}">验资</a>
+                                        </li>
+                                        <li><a href="{:url('Customer/compliance_u')}">合规审核</a>
+                                        </li>
+                                        <!-- <li><a href="{:url('Customer/audit_u')}">审计核单</a>
+                                        </li>
+                                        <li><a href="{:url('Customer/kefu_u')}">客服回访</a> -->
+                                        </li>
+                                        <li><a href="{:url('Customer/bm_fzr_u')}">工单转让</a>
+                                    </ul>
+                                </li>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index.html#"><i class="fa fa-sitemap"></i> <span class="nav-label">导师中心</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{:url('Teacher/index')}">资源列表</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Teacher/tea_news')}">新分配</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Teacher/tea_news_py')}">培养中</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Teacher/tea_news_kf')}">开发中</a>
+                                </li>
+                                <li><a href="{:url('Teacher/res_yanzi')}">验资客户</a>
+                                </li>
+                                <li><a href="{:url('Teacher/res_ydao')}">引导签约</a>
+                                </li>
+                                <li><a href="{:url('Teacher/res_over')}">成交客户</a>
+                                </li>
+                                <!-- <li><a href="{:url('Teacher/tsyx')}">投诉倾向客户</a></li> -->
+                                <li><a href="{:url('Teacher/bm_fzr')}">工单转让</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">服务中心</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{:url('Service/index')}">导师转入资源</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Service/ser_news')}">新分配</a>
+                                </li>
+                                <li>
+                                    <a href="#">正常客户<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li>
+                                            <a href="{:url('Service/ser_zd')}">重点客户</a>
+                                        </li>
+                                        <li>
+                                            <a href="{:url('Service/ser_pt')}">普通客户</a>
+                                        </li>
+                                        <li>
+                                            <a href="{:url('Service/ser_dc')}">多次开发客户</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">异常客户<span class="fa arrow"></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li>
+                                            <a href="{:url('Service/ser_dq')}">到期客户</a>
+                                        </li>
+                                        <li>
+                                            <a href="{:url('Service/ser_ts')}">投诉客户</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{:url('Service/ser_gdzy')}">工单转让</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index.html#"><i class="fa fa-sitemap"></i> <span class="nav-label">投诉客户</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{:url('Blacklist/complaint')}">客户投诉录入</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Blacklist/complaint_n')}">内诉</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Blacklist/complaint_w')}">外诉</a>
+                                </li>
+                                <li>
+                                    <a href="{:url('Blacklist/complaint_al')}">总部反馈</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{:url('Summary/index')}"><i class="fa fa-picture-o"></i> <span class="nav-label">客户信息汇总</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table"></i> <span class="nav-label">产品清单</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Summary/add_pd')}">新增产品</a>
+                                </li>
+                                <li><a href="{:url('Summary/pd_list')}">产品列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">业绩统计</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Summary/sum_scb')}">市场部</a>
+                                </li>
+                                <li><a href="{:url('Summary/sum_dsb')}">导师部</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">知识库</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Knowlabel/index')}">上传资料</a>
+                                </li>
+                                <li><a href="{:url('Knowlabel/know_list')}">知识列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">推广渠道</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Knowlabel/tgqd')}">新增渠道</a>
+                                </li>
+                                <li><a href="{:url('Knowlabel/tgqd_list')}">渠道列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">标签设置</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{:url('Knowlabel/label')}">新增标签</a>
+                                </li>
+                                <li><a href="{:url('Knowlabel/label_list')}">标签列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{:url('Rule/index')}"><i class="fa fa-flask"></i> <span class="nav-label">系统权限</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                            
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用CRM系统</span>
+                            </li>
+                            <li>
+                                <a href="{:url('Sign/logout')}">
+                                    <i class="fa fa-sign-out"></i> 退出
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                {block name="body"}{/block}
+            </div>    
+        </div>
+    </body>
+</html>

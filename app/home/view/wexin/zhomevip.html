@@ -1,0 +1,148 @@
+{extend name="public/wehomebase"/}
+{block name="body"}
+<div class="container" style="position: relative;">
+<div class="col-xs-12" style="position: absolute;top:0;left: 0;height: 400px;width: 100%;border-bottom-right-radius:15px;border-bottom-left-radius:15px; background:url(__PUBLIC__static/home/atgwximg/atvip2.jpg)  0px 0px / 100% 100%  no-repeat; "></div>
+<div style="height: 400px;padding:25px 15px 10px 25px;" class="swiper-container col-xs-12" id="swiper1">
+    <div class="swiper-wrapper">
+        <!-- 下面是4个不同颜色的轮播滑块 -->
+        <div class="col-xs-12 thumbnail thumbnail_no_bg" style="border-bottom-right-radius:15px;border-bottom-left-radius:15px;position: relative;height: 370px;" class="swiper-slide">
+          <img src="__PUBLIC__static/home/atgwximg/atvip1.png">
+          <a style="color:#8e8e8e;" href="{:url('Wexin/gpindexwfz')}"><img style="position: absolute;right: 30%;bottom: 5%;height:40px;" src="__PUBLIC__static/home/atgwximg/atvip3.png"></a>
+          <a style="color:#8e8e8e;" href="{:url('Wexin/gpvideowfz',array('vdo_id'=>$mingshi['id']))}"><img style="position: absolute;left: 20%;bottom: 0;height: 210px;" src="{$course[0][pic_url]}">
+          <img style="position: absolute;left: 35%;bottom: 20%;height:50px;" src="__PUBLIC__static/home/atgwximg/atvip4.png">
+          </a>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12" style="margin:35px 0 0px 0;border-radius:15px;height: 280px;clear:both;">
+  <div class="col-xs-12" style="padding:5px;border-bottom:1px dashed #ccc;">
+    <div class="col-xs-8" style="text-align:left;padding-left: 10px;">爱淘牛股</div>
+    <div class="col-xs-4" style="text-align:right;font-size: 12px;"><a style="color:#8e8e8e;" href="{:url('Wexin/atniugu')}">查看更多>></a></div>
+  </div>
+  <div class="col-xs-12" style="padding:5px;height: 250px;overflow-y: auto;">
+    {volist name="niugu" id="vo"}
+      <div class="col-xs-12 his_con" style="padding:5px 0 0px 0;">
+          <div class="col-xs-2" style="color: #eb4537;font-weight: bold;margin-top:5px;font-size: 16px;">{$vo.min}</div>
+          <div class="col-xs-10" id="gpimg" style="text-align:left;">{$vo.content}</div>
+          <div class="col-xs-10 col-xs-offset-2" style="text-align:left;font-size:12px;">{$vo.day}</div>
+          <div class="col-xs-10 col-xs-offset-2" style="font-size: 12px;margin-bottom: 5px;text-align:left;color:#ccc;border-bottom:1px solid #d5d5d5; ">策略仅供参考  不作为卖买依据</div>
+      </div>
+    {/volist}
+  </div>
+</div>
+<div class="col-xs-12" style="padding:10px 15px;">
+<a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzI4NjcwMTQ0Mw==&hid=4&sn=7c21a90bf9d060f315130e178b6d897a&scene=18#wechat_redirect"><div class="col-xs-12" style="height: 223px; background:url(__PUBLIC__static/home/atgwximg/atvip8.png)  0px 0px / 100% 100%  no-repeat;border-radius:15px;">
+</div></a></div>
+
+<div class="col-xs-12" style="margin: 0 0 5px 0;background: #fff;border-radius:15px;height: 270px;padding:5px ;">
+  <div class="col-xs-12" style="padding:5px 0;border-bottom:1px dashed #ccc;">
+    <div class="col-xs-8" style="text-align:left;padding-left: 10px;">牛散智库</div>
+    <div class="col-xs-4" style="text-align:right;font-size: 12px;"><a style="color:#8e8e8e;" href="{:url('Wexin/gpindex')}">查看更多>></a></div>
+  </div>
+  <div class="col-xs-12 swiper-container" id="swiper2" style="padding:10px 5px;height: 230px;text-align:center;">
+    <div class="swiper-wrapper">
+      <div style="background-color: none;" class="swiper-slide">
+      {volist name="course" id="vo"}
+      <a style="color:#000;" href="{:url('Wexin/gpvideo',array('vdo_id'=>$vo['id']))}">
+        <div class="col-xs-3" style="padding:0px 5px 5px 5px;">
+            <div class="col-xs-12 thumbnail" style="margin-bottom:0;position: relative;">
+              <img src="{$vo.pic_url}" style="height:150px;" alt="...">
+              <img style="position: absolute;left: 40%;bottom: 35%;height:40px;" src="__PUBLIC__static/home/atgwximg/atvip4.png">
+            </div>
+            <div class="col-xs-12 col-padding-0">导师：{$vo.teacher}</div>
+            <div class="col-xs-12 col-padding-0">{$vo.vdo_name}</div>
+        </div>
+      </a>  
+      {/volist}
+      </div>
+      <div style="background-color: none;" class="swiper-slide">
+      {volist name="course1" id="vo"}
+      <a style="color:#000;" href="{:url('Wexin/gpvideo',array('vdo_id'=>$vo['id']))}">
+        <div class="col-xs-3" style="padding:0px 5px 5px 5px;">
+            <div class="col-xs-12 thumbnail" style="margin-bottom:0;position: relative;">
+              <img src="{$vo.pic_url}" style="height:150px;" alt="...">
+              <img style="position: absolute;left: 40%;bottom: 35%;height:40px;" src="__PUBLIC__static/home/atgwximg/atvip4.png">
+            </div>
+            <div class="col-xs-12 col-padding-0">导师：{$vo.teacher}</div>
+            <div class="col-xs-12 col-padding-0">{$vo.vdo_name}</div>
+        </div>
+      </a>    
+      {/volist}
+      </div>
+      <div style="background-color: none;" class="swiper-slide">
+      {volist name="course2" id="vo"}
+      <a style="color:#000;" href="{:url('Wexin/gpvideo',array('vdo_id'=>$vo['id']))}">
+        <div class="col-xs-3" style="padding:0px 5px 5px 5px;">
+            <div class="col-xs-12 thumbnail" style="margin-bottom:0;position: relative;">
+              <img src="{$vo.pic_url}" style="height:150px;" alt="...">
+              <img style="position: absolute;left: 40%;bottom: 35%;height:40px;" src="__PUBLIC__static/home/atgwximg/atvip4.png">
+            </div>
+            <div class="col-xs-12 col-padding-0">导师：{$vo.teacher}</div>
+            <div class="col-xs-12 col-padding-0">{$vo.vdo_name}</div>
+        </div>
+      </a>    
+      {/volist}
+      </div>
+    </div>
+    <!-- <div class="swiper-button-prev swiper-button-white"></div>左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+    <!-- <div class="swiper-button-next swiper-button-white"></div>右箭头。如果放置在swiper-container外面，需要自定义样式。--> 
+    <div class="swiper-pagination"></div><!--分页器（就是4个点点）-->
+  </div>
+</div>
+<div class="col-xs-12" style="margin: 10px 0 5px 0;background: #fff;border-radius:15px;padding:0 5px;">
+  <div class="col-xs-12" style="padding:5px;border-bottom:1px dashed #ccc;">
+    <div class="col-xs-8" style="text-align:left;padding-left: 10px;">爱淘精研</div>
+    <!-- <div class="col-xs-4" style="text-align:right;font-size: 12px;">查看更多>></div> -->
+  </div>
+  <div class="col-xs-12" style="padding:10px 0;height:260px;overflow-y: auto;">
+  {volist name="yanbao" id="vo"}
+  <div class="col-xs-6 margin-bottom-10">
+    <a href="/public/pdf/web/viewer.html?file={$vo.url}">
+      <div class="col-xs-5 col-padding-0">
+        <div class="col-xs-12 thumbnail" style="margin-bottom:0;">
+        <img src="__PUBLIC__static/home/atgwximg/atvip9.jpg" alt="...">
+        </div>
+        <div class="col-xs-12 col-padding-0" style="font-size: 12px;color:#8e8e8e;text-align:center">{$vo.day}</div>
+      </div>
+      <div class="col-xs-7">
+        <div class="col-xs-12 col-padding-0" style="color:#f67b3c;">{$vo.title|mb_substr=0,22,"utf-8"}</div>
+        <div class="col-xs-12 col-padding-0" style="font-size: 12px;color:#8e8e8e;">{$vo.jianjie|mb_substr=0,90,"utf-8"}</div>
+      </div>
+    </a>  
+  </div>
+  {/volist}
+  </div>
+</div>
+<div class="col-xs-12" style="padding:10px;height: 50px;"></div>
+</div>
+<script>
+  var swiper = new Swiper('#swiper1', {
+  effect : 'cube',
+  centeredSlides: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+  var swiper = new Swiper('#swiper2', {
+  centeredSlides: true,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
+  $("#atnavsub").children().eq(2).addClass("active").siblings().removeClass("active");
+</script>
+{/block}

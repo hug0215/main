@@ -1,0 +1,329 @@
+{extend name="public/wehomebase"/}
+{block name="body"}
+<div class="container" style="position: relative;">
+<div class="col-xs-12" style="position: absolute;top:0;left: 0;height: 450px;width: 100%;border-bottom-right-radius:15px;border-bottom-left-radius:15px; background:url(__PUBLIC__static/home/atgwximg/atvip2.jpg)  0px 0px / 100% 100%  no-repeat;">
+</div>
+<img style="position: absolute;left: 3%;top: 10%;height: 110px;border-radius:100%;" src="{$avatar}">
+<h3 id="myname" style="position: absolute;left: 15%;top: 10%;color:#fbd999;font-weight: bold;">{$username}</h3>
+<h4 style="position: absolute;left: 15%;top: 15%;color:#fbd999;font-weight: bold;margin-top:20px;">账号：{$account}</h4>
+<div style="height: 300px;padding:155px 15px 10px 25px;" class="swiper-container col-xs-12" id="swiper1">
+    <div class="swiper-wrapper">
+        <!-- 下面是4个不同颜色的轮播滑块 -->
+        <div class="col-xs-12 thumbnail thumbnail_no_bg" style="border-bottom-right-radius:15px;border-bottom-left-radius:15px;position: relative;height: 270px;" >
+         <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/aitaovip')}"> <img style="height: 270px;border-radius:15px;" src="__PUBLIC__static/home/atgwximg/banner5.jpg"></a>
+        </div>
+    </div>
+</div>
+<div style="height: 380px;margin-top: 150px;background: #fff;padding: 30px 10px;" class="swiper-container col-xs-12" id="swiper2">
+    <div class="swiper-wrapper">
+        <div style="background-color: none;text-align: center;" class="swiper-slide">
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+          <div class="row margin-bottom-10">
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a style="color:#7d7d7d;text-decoration:none;" href="http://kf.skyfollowsnow.pro/s/288674kpy">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mkf.png' />
+                </div>
+                爱淘客服
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a id="atwechat" style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mfx.png' />
+                </div>
+                分享公众号
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a id="atfankui" style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/myj.png' />
+                </div>
+                意见反馈
+              </a>
+            </div>
+          </div>
+          <div class="row margin-top-20">
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mby.png' />
+                </div>
+                包月服务
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a id="atnc" style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mnc.png' />
+                </div>
+                修改昵称
+              </a>
+            </div> 
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a id="atmm" style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mmm.png' />
+                </div>
+                修改密码
+              </a>
+            </div>
+          </div>
+          <div class="row margin-top-20">
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Wexin/gpindex')}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mns.png' />
+                </div>
+                牛散智库
+              </a>
+            </div>
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              <a style="color:#7d7d7d;text-decoration:none;" href="#">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/msz.png' />
+                </div>
+                设置
+              </a>
+            </div> 
+            <div class="col-xs-4" style="padding: 3px 0 0 0;">
+              {if condition="$islogin eq '0'"}
+                <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Sign/lg_mb')}">
+                <div class="col-xs-12" style="padding: 2px 0">
+                  <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mdl.png' />
+                </div>
+                登录
+              </a>
+              {else /} 
+                <a style="color:#7d7d7d;text-decoration:none;" href="{:url('Sign/lg_out')}">
+                  <div class="col-xs-12" style="padding: 2px 0">
+                    <img style="height: 60px;" src='__PUBLIC__static/home/atgwximg/mtc.png' />
+                  </div>
+                  退出
+                </a>
+              {/if}
+            </div>
+          </div>
+          <!-- 下面是4个不同颜色的轮播滑块 -->
+        </div>
+    </div>
+</div>
+<div class="col-xs-12" style="padding:10px;height: 50px;"></div>
+</div>
+<script>
+var swiper = new Swiper('#swiper1', {
+  effect : 'cube',
+  centeredSlides: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+var swiper = new Swiper('#swiper2', {
+  centeredSlides: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
+$("#atwechat").click(function(){
+  var win_width = $(window).width();
+    var win_height = $(window).height();
+    if(win_width < 600){
+      var iwidth = win_width-100+"px";
+      var iheight = win_width-150+"px";
+      layer.open({
+        type: 1,
+        title: false,
+        area: [iwidth, iheight],
+        closeBtn: 1, //不显示关闭按钮
+        anim: 2,
+        shadeClose: true, //开启遮罩关闭
+        content:'<div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;overflow-y:auto;overflow-x:hidden;">\
+                   <div class="col-xs-12 thumbnail thumbnail_no_bg" style="text-align:center;">\
+                        <img src="__PUBLIC__static/home/atgwximg/atcode.jpg">\
+                        <p>长按二维码可分享给好友</p>\
+                   </div>\
+                </div>'
+      });
+    }
+});
+{if condition="$islogin eq '0'"}
+$("#atnc").click(function(){
+   layer.open({
+    content: '游客没有修改昵称权限！'
+    ,skin: 'msg'
+    ,time: 2 //2秒后自动关闭
+  });
+});
+$("#atmm").click(function(){
+   layer.open({
+    content: '游客没有修改密码权限！'
+    ,skin: 'msg'
+    ,time: 2 //2秒后自动关闭
+  });
+});
+$("#atfankui").click(function(){
+   layer.open({
+    content: '游客没有意见反馈权限！'
+    ,skin: 'msg'
+    ,time: 2 //2秒后自动关闭
+  });
+});
+{else /} 
+$("#atnc").click(function(){
+  var win_width = $(window).width();
+  var win_height = $(window).height();
+  var iwidth = win_width-58+"px";
+  var iheight = win_width-150+"px";
+  var fktip = layer.open({
+    type: 1
+    ,content: '<div class="col-md-11 col-sm-11 col-xs-11" style="padding:10px;overflow-y:auto;overflow-x:hidden;text-align:center;">\
+                   <div class="form-group" style="text-align:center;">\
+                        <input type="text" style="border-radius: 5px;width:'+iwidth+';" name="username" class="form-control" placeholder="请输入新的昵称">\
+                   </div>\
+                   <div class="col-xs-12" style="padding:0;line-height: 40PX;height: 40px;">\
+                        <button id="change" style="background: #36bcd1;border:none;margin-top:5px;border-radius: 5px;" type="button" class="btn btn-danger btn-lg col-xs-11">修改</button>\
+                    </div>\
+                </div>'
+    ,anim: 'up'
+    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 150px; padding:10px 0; border:none;'
+  });
+  $("#change").click(function(){
+    var username = $("input[name='username']").val();
+    if(username == ""){
+      layer.open({
+        content: '输入内容不能为空！'
+        ,skin: 'msg'
+        ,time: 2 //2秒后自动关闭
+      });
+    }else{
+      $.post('/home/wexin/atnc', {uid:'{$atguid}',username:username}, function(msg){console.log(msg);
+        if(msg == "1"){
+          layer.open({
+            content: '修改成功！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+          $("#myname").html(username);
+          layer.close(fktip);
+        }else{
+          layer.open({
+            content: '修改失败！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+        }
+      }, 'json');
+    }
+   
+  });
+});
+$("#atmm").click(function(){
+  var win_width = $(window).width();
+  var win_height = $(window).height();
+  var iwidth = win_width-58+"px";
+  var iheight = win_width-150+"px";
+  var fktip = layer.open({
+    type: 1
+    ,content: '<div class="col-md-11 col-sm-11 col-xs-11" style="padding:10px;overflow-y:auto;overflow-x:hidden;text-align:center;">\
+                   <div class="form-group" style="text-align:center;">\
+                        <input type="text" style="border-radius: 5px;width:'+iwidth+';" name="pwd" class="form-control" placeholder="请输入新的密码">\
+                   </div>\
+                   <div class="col-xs-12" style="padding:0;line-height: 40PX;height: 40px;">\
+                        <button id="change" style="background: #36bcd1;border:none;margin-top:5px;border-radius: 5px;" type="button" class="btn btn-danger btn-lg col-xs-11">修改</button>\
+                    </div>\
+                </div>'
+    ,anim: 'up'
+    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 150px; padding:10px 0; border:none;'
+  });
+  $("#change").click(function(){
+    var username = $("input[name='pwd']").val();
+    if(username == ""){
+      layer.open({
+        content: '输入内容不能为空！'
+        ,skin: 'msg'
+        ,time: 2 //2秒后自动关闭
+      });
+    }else{
+      $.post('/home/wexin/atmm', {uid:'{$atguid}',username:username}, function(msg){console.log(msg);
+        if(msg == "1"){
+          layer.open({
+            content: '修改成功！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+          layer.close(fktip);
+        }else{
+          layer.open({
+            content: '修改失败！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+        }
+      }, 'json');
+    }
+   
+  });
+});
+$("#atfankui").click(function(){
+  var win_width = $(window).width();
+  var win_height = $(window).height();
+  var iwidth = win_width-58+"px";
+  var iheight = win_width-150+"px";
+  var fktip = layer.open({
+    type: 1
+    ,content: '<div class="col-md-11 col-sm-11 col-xs-11" style="padding:10px;overflow-y:auto;overflow-x:hidden;text-align:center;">\
+                   <div class="form-group" style="text-align:center;">\
+                        <textarea rows="5" type="text" style="border-radius: 5px;width:'+iwidth+';" name="fankui" class="form-control" placeholder="请输入您要反馈的内容"></textarea>\
+                   </div>\
+                   <div class="col-xs-12" style="padding:0;line-height: 40PX;height: 40px;">\
+                        <button id="change" style="background: #36bcd1;border:none;margin-top:5px;border-radius: 5px;" type="button" class="btn btn-danger btn-lg col-xs-11">提交</button>\
+                    </div>\
+                </div>'
+    ,anim: 'up'
+    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+  });
+  $("#change").click(function(){
+    var username = $("textarea[name='fankui']").val();
+    if(username == ""){
+      layer.open({
+        content: '输入内容不能为空！'
+        ,skin: 'msg'
+        ,time: 2 //2秒后自动关闭
+      });
+    }else{
+      var myname = $("#myname").html();
+      $.post('/home/wexin/atfk', {uid:'{$atguid}',username:username,myname:myname}, function(msg){console.log(msg);
+        if(msg == "1"){
+          layer.open({
+            content: '提交成功！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+          layer.close(fktip);
+        }else{
+          layer.open({
+            content: '提交失败！'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+        }
+      }, 'json');
+    }
+   
+  });
+});
+{/if}
+$("#atnavsub").children().eq(4).addClass("active").siblings().removeClass("active");
+</script>
+{/block}
